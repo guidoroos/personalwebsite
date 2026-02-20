@@ -1,0 +1,16 @@
+[versions]
+# Gebruik stabiele versies die goed samenspelen
+composeMultiplatform = "1.10.0"
+kotlin = "2.3.0"
+styledNext = "2026.2.15"
+kotlinExtensions ="1.0.1-pre.823"
+
+[libraries]
+# Alleen de essentie voor Web (DOM)
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeMultiplatform" }
+compose-html-core = { module = "org.jetbrains.compose.html:html-core", version.ref = "composeMultiplatform" }
+
+[plugins]
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
