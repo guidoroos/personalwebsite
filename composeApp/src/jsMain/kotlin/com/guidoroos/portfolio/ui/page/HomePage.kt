@@ -1,14 +1,18 @@
 package com.guidoroos.portfolio.ui.page
 
+import LocalAppTheme
+import LocalStyles
 import androidx.compose.runtime.Composable
 import com.guidoroos.portfolio.ui.styling.*
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
-import com.guidoroos.portfolio.ui.styling.AppStylesheet
 import com.guidoroos.portfolio.data.content.homePageContent
 
 @Composable
 fun HomePage() {
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
+
     Div(attrs = {
         style {
             display(DisplayStyle.Flex)
@@ -20,7 +24,7 @@ fun HomePage() {
         }
     }) {
         // 1. Titel
-        H1(attrs = { classes(AppStylesheet.h1Hero) }) {
+        H1(attrs = { classes(styles.h1Hero) }) {
             Text(homePageContent.title)
         }
 
@@ -41,7 +45,7 @@ fun HomePage() {
 
         // 3. About Me Textblok
         Div(attrs = { style { maxWidth(700.px) } }) {
-            P(attrs = { classes(AppStylesheet.bodyRegular) }) {
+            P(attrs = { classes(styles.bodyRegular) }) {
                 Text(homePageContent.aboutMe)
             }
         }
@@ -49,7 +53,7 @@ fun HomePage() {
         // 4. Techstack Sectie
         Section(attrs = { style { marginTop(AppSpacing.lg) } }) {
             H2(attrs = {
-                classes(AppStylesheet.bodyRegular)
+                classes(styles.bodyRegular)
                 style { fontWeight(AppTypography.weightBold); marginBottom(AppSpacing.md) }
             }) {
                 Text("Techstack")
@@ -74,17 +78,17 @@ fun HomePage() {
             style {
                 marginTop(AppSpacing.xl)
                 padding(AppSpacing.lg)
-                backgroundColor(AppColors.surface)
+                backgroundColor(theme.surface)
                 borderRadius(AppSpacing.borderRadius)
-                property("border", "1px solid ${AppColors.border}")
+                property("border", "1px solid ${theme.border}")
             }
         }) {
-            H3(attrs = { classes(AppStylesheet.navLabel); style { marginBottom(AppSpacing.sm) } }) {
+            H3(attrs = { classes(styles.navLabel); style { marginBottom(AppSpacing.sm) } }) {
                 Text(homePageContent.ctaTitle)
             }
             A(href = "mailto:${homePageContent.ctaEmail}", attrs = {
                 style {
-                    color(AppColors.primary)
+                    color(theme.primary)
                     fontWeight(AppTypography.weightBold)
                     textDecoration("none")
                 }
@@ -97,14 +101,17 @@ fun HomePage() {
 
 @Composable
 fun TechBadge(text: String) {
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
+
     Span(attrs = {
         style {
             padding(0.4.cssRem, 0.8.cssRem)
-            backgroundColor(AppColors.background)
+            backgroundColor(theme.background)
             borderRadius(8.px) // Agency-style: iets minder rond is vaak strakker
             fontSize(AppTypography.sizeSmall)
             fontWeight(AppTypography.weightMedium)
-            property("border", "1px solid ${AppColors.border}")
+            property("border", "1px solid ${theme.border}")
         }
     }) {
         Text(text)

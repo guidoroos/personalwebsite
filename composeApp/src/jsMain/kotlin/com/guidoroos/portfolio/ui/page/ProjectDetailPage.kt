@@ -1,10 +1,10 @@
 package com.guidoroos.portfolio.ui.page
 
+import LocalAppTheme
+import LocalStyles
 import androidx.compose.runtime.Composable
 import com.guidoroos.portfolio.data.model.Project
-import com.guidoroos.portfolio.ui.styling.AppColors
 import com.guidoroos.portfolio.ui.styling.AppSpacing
-import com.guidoroos.portfolio.ui.styling.AppStylesheet
 import com.guidoroos.portfolio.ui.styling.AppTypography
 import org.jetbrains.compose.web.attributes.ATarget
 import org.jetbrains.compose.web.attributes.target
@@ -13,13 +13,16 @@ import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
-    Div(attrs = { classes(AppStylesheet.container) }) {
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
+
+    Div(attrs = { classes(styles.container) }) {
 
         // 1. Navigation Back
         Span(attrs = {
             style {
                 cursor("pointer")
-                color(AppColors.textSecondary)
+                color(theme.textSecondary)
                 display(DisplayStyle.Flex)
                 alignItems(AlignItems.Center)
                 gap(AppSpacing.xs)
@@ -33,7 +36,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
         // 2. Header: Title & Context
         Header(attrs = { style { marginBottom(AppSpacing.xl) } }) {
             H1 { Text(project.title) }
-            P(attrs = { style { color(AppColors.textSecondary); fontSize(AppTypography.sizeH3) } }) {
+            P(attrs = { style { color(theme.textSecondary); fontSize(AppTypography.sizeH3) } }) {
                 val context = if (project.clientName != null) "${project.clientName} via ${project.entityName}" else project.entityName
                 Text("$context  •  ${project.startDate}${project.endDate?.let { " — $it" } ?: " — Heden"}")
             }
@@ -78,7 +81,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
             Footer(attrs = {
                 style {
                     padding(AppSpacing.lg, 0.px)
-                    property("border-top", "1px solid ${AppColors.border}")
+                    property("border-top", "1px solid ${theme.border}")
                     display(DisplayStyle.Flex)
                     flexDirection(FlexDirection.Column)
                     gap(AppSpacing.md)
@@ -99,7 +102,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                 }
 
                 // Tech stack dots (hergebruik van je eerdere logica)
-                P(attrs = { style { color(AppColors.textSecondary); fontSize(AppTypography.sizeTiny) } }) {
+                P(attrs = { style { color(theme.textSecondary); fontSize(AppTypography.sizeTiny) } }) {
                     Text("STACK: " + project.techStack.joinToString(" • ").uppercase())
                 }
             }

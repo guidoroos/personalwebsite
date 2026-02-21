@@ -1,6 +1,8 @@
 package com.guidoroos.portfolio.ui.component
 
 
+import LocalAppTheme
+import LocalStyles
 import androidx.compose.runtime.Composable
 import com.guidoroos.portfolio.data.model.Project
 import com.guidoroos.portfolio.data.model.ProjectType
@@ -11,8 +13,11 @@ import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun ProjectCard(project: Project, onClick: () -> Unit) {
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
+
     Div(attrs = {
-        classes(AppStylesheet.card)
+        classes(styles.card)
         style {
             cursor("pointer")
             display(DisplayStyle.Flex)
@@ -35,7 +40,7 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
                 style {
                     fontSize(AppTypography.sizeTiny)
                     fontWeight(AppTypography.weightBold)
-                    color(AppColors.primary)
+                    color(theme.primary)
                     letterSpacing(AppTypography.lsWide)
                 }
             }) {
@@ -51,7 +56,7 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
             Span(attrs = {
                 style {
                     fontSize(AppTypography.sizeTiny)
-                    color(AppColors.textSecondary)
+                    color(theme.textSecondary)
                 }
             }) {
                 val period = if (project.endDate == null) "${project.startDate} — Heden" else "${project.startDate} — ${project.endDate}"
@@ -73,9 +78,9 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
 
         // 3. Beschrijving
         P(attrs = {
-            classes(AppStylesheet.bodySmall)
+            classes(styles.bodySmall)
             style {
-                color(AppColors.textSecondary)
+                color(theme.textSecondary)
                 flex(1) // Zorgt dat de kaartjes in een grid even hoog lijken
                 marginBottom(AppSpacing.md)
             }
@@ -97,7 +102,7 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
             Span(attrs = {
                 style {
                     fontSize(AppTypography.sizeTiny)
-                    color(AppColors.textSecondary)
+                    color(theme.textSecondary)
                     fontWeight(AppTypography.weightBold)
                     letterSpacing(1.px)
                 }

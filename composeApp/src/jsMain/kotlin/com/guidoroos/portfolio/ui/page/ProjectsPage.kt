@@ -7,20 +7,23 @@ import com.guidoroos.portfolio.data.model.ProjectType
 import com.guidoroos.portfolio.ui.component.ProjectCard
 import com.guidoroos.portfolio.ui.styling.AppStylesheet
 import com.guidoroos.portfolio.ui.styling.AppSpacing
-import com.guidoroos.portfolio.ui.styling.AppColors
 
 // Compose HTML imports
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
 @Composable
-fun ProjectsPage(onProjectSelect: (Project) -> Unit) {
+fun ProjectsPage(
+    onProjectSelect: (Project) -> Unit
+) {
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
 
-    Div(attrs = { classes(AppStylesheet.container) }) {
+    Div(attrs = { classes(styles.container) }) {
 
         // Pagina Header
         H1 { Text(projectsPageData.title) }
-        P(attrs = { style { color(AppColors.textSecondary); marginBottom(AppSpacing.xl) } }) {
+        P(attrs = { style { color(theme.textSecondary); marginBottom(AppSpacing.xl) } }) {
             Text(projectsPageData.subtitle)
         }
 
@@ -32,7 +35,7 @@ fun ProjectsPage(onProjectSelect: (Project) -> Unit) {
             onProjectSelect = onProjectSelect
         )
 
-        Hr(attrs = { classes(AppStylesheet.divider) })
+        Hr(attrs = { classes(styles.divider) })
 
         // 2. LOONDIENST
         ProjectSection(
@@ -42,7 +45,7 @@ fun ProjectsPage(onProjectSelect: (Project) -> Unit) {
             onProjectSelect = onProjectSelect
         )
 
-        Hr(attrs = { classes(AppStylesheet.divider) })
+        Hr(attrs = { classes(styles.divider) })
 
         // 3. SIDE PROJECTS
         ProjectSection(
@@ -62,14 +65,16 @@ fun ProjectSection(
     onProjectSelect: (Project) -> Unit
 ) {
     if (projects.isEmpty()) return
+    val theme = LocalAppTheme.current
+    val styles = LocalStyles.current
 
     Section(attrs = { style { marginBottom(AppSpacing.xl) } }) {
         H2 { Text(title) }
         P(attrs = {
             style {
-                color(AppColors.textSecondary);
+                color(theme.textSecondary);
                 marginBottom(AppSpacing.lg);
-                maxWidth(600.px) // Houdt de tekst leesbaar
+                maxWidth(600.px)
             }
         }) { Text(subtitle) }
 
