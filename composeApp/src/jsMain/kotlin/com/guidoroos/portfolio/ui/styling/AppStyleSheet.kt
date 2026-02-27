@@ -162,17 +162,33 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
     val backgroundPattern by style {
         backgroundColor(theme.background)
 
-        // By using 100% spread, the colors "pool" in the corners and
-        // fade out across the whole screen, making the contrast easier to see.
+        // Ensure the container always covers the full scrollable area
+        minHeight(100.vh)
+        width(100.percent)
+
         backgroundImage(
             "radial-gradient(at 0% 0%, ${theme.background} 0%, transparent 100%), " +
                     "radial-gradient(at 100% 100%, ${theme.background3} 0%, transparent 100%), " +
                     "radial-gradient(at 50% 0%, ${theme.background2} 0%, transparent 80%)"
         )
 
+        // THE FIX:
+        // Desktop gets the smooth 'fixed' look.
+        // We use a media query to handle the mobile 'weirdness'.
         backgroundAttachment("fixed")
+        property("background-size", "cover")
 
-        property("transition", "background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), background-image 0.5s ease")
+        media("(max-width: 768px)") {
+            self style {
+                // Mobile browsers struggle with 'fixed'.
+                // This 'scroll' + '100% 100%' forces the gradient to stretch
+                // to the full length of your content so it never ends.
+                backgroundAttachment("scroll")
+                property("background-size", "100% 100%")
+            }
+        }
+
+        property("transition", "background-color 0.8s ease, background-image 0.5s ease")
     }
 
     val hoverIcon by style {
@@ -220,8 +236,8 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         justifyContent(JustifyContent.Center)
         alignItems(AlignItems.Center)
 
-        width(36.px)  // Slightly smaller base size
-        height(36.px)
+        width(40.px)  // Slightly smaller base size
+        height(40.px)
         cursor("pointer")
 
         property("mask-repeat", "no-repeat")

@@ -24,9 +24,9 @@ fun UrlIcon(svgName: String, url: String) {
             style {
                 // Optical sizing so they don't look weirdly different sizes
                 val iconSize = when {
-                    svgName.contains("linkedin") -> 22.px
-                    svgName.contains("github") -> 24.px
-                    else -> 24.px
+                    svgName.contains("linkedin") -> 24.px
+                    svgName.contains("github") -> 26.px
+                    else -> 26.px
                 }
                 width(iconSize)
                 height(iconSize)
