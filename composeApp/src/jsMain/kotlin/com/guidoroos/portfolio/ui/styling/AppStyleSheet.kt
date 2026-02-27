@@ -220,8 +220,8 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         justifyContent(JustifyContent.Center)
         alignItems(AlignItems.Center)
 
-        width(28.px)  // Slightly smaller base size
-        height(28.px)
+        width(36.px)  // Slightly smaller base size
+        height(36.px)
         cursor("pointer")
 
         property("mask-repeat", "no-repeat")
@@ -235,6 +235,13 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
 
         // Smooth color transition for theme switching
         property("transition", "background-color 0.2s ease")
+
+        media("(max-width: 768px)") {
+            self style {
+                width(28.px)
+                height(28.px)
+            }
+        }
     }
 
     val socialIconGroup by style {
@@ -253,8 +260,15 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         display(DisplayStyle.Flex)
         justifyContent(JustifyContent.Center)
         alignItems(AlignItems.Center)
-        width(32.px)
-        height(32.px)
+        width(40.px)
+        height(40.px)
+
+        media("(max-width: 768px)") {
+            self style {
+                width(32.px)
+                height(32.px)
+            }
+        }
     }
 
 
