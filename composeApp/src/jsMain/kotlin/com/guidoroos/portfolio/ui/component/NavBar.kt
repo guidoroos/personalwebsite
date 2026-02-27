@@ -47,7 +47,16 @@ fun Navbar(
                 }
             }
 
-            ActionIcon(svgName = if (isDark) "sun" else "moon") {
+            ActionIcon(
+                svgName = if (isDark) "sun" else "moon",
+                attrsModifier = {
+                    classes(styles.hideOnMobile)
+
+                    style {
+                        marginLeft(8.px)
+                    }
+                }
+            ) {
                 toggleTheme()
             }
         }

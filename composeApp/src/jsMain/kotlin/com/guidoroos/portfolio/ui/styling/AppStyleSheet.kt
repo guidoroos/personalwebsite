@@ -271,5 +271,13 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         }
     }
 
+    val hideOnMobile by style {
+        media("(max-width: 768px)") {
+            self style {
+                display(DisplayStyle.None)
+            }
+        }
+    }
+
 
 }

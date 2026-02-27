@@ -3,13 +3,16 @@ package com.guidoroos.portfolio.ui.component
 import LocalAppTheme
 import LocalStyles
 import androidx.compose.runtime.*
+import org.jetbrains.compose.web.attributes.AttrsScope
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
+import org.w3c.dom.HTMLDivElement
 
 @Composable
 fun ActionIcon(
     svgName: String,
     styleModifier: StyleScope.() -> Unit = {},
+    attrsModifier: AttrsScope<HTMLDivElement>.() -> Unit = {},
     onClickAction: () -> Unit
 ) {
     val theme = LocalAppTheme.current
@@ -19,6 +22,7 @@ fun ActionIcon(
         classes(styles.iconMaskBase, styles.hoverIcon)
 
         onClick { onClickAction() }
+        attrsModifier()
 
         style {
             // Dynamic mask path based on the svgName
