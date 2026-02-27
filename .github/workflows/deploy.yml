@@ -2,7 +2,7 @@ name: Deploy RoosMobile Portfolio
 
 on:
   push:
-    branches: ["master"] # Or "main"
+    branches: ["master"] # Double-check if your branch is 'master' or 'main'
   workflow_dispatch:
 
 permissions:
@@ -30,8 +30,9 @@ jobs:
       - name: Upload to Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          # This path is the standard for Kotlin/JS
-          path: ./build/dist/js/productionExecutable
+          # Wildcard ensures it finds the folder even inside a 'composeApp' module
+          path: "**/build/dist/js/productionExecutable"
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
