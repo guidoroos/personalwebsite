@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Wildcard ensures it finds the folder even inside a 'composeApp' module
-          path: "**/build/dist/js/productionExecutable"
+          path: "composeApp/build/dist/js/productionExecutable"
 
       - name: Deploy to GitHub Pages
         id: deployment
