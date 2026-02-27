@@ -30,9 +30,9 @@ object ProjectContent {
                     "Reductie van boilerplate code met 40%",
                     "Succesvolle migratie zonder downtime"
                 ),
-                productUrls = listOf(
-                    "https://play.google.com/store/apps/details?id=com.bnpp.mobile",
-                    "https://apps.apple.com/app/bnp-paribas"
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=com.bnpp.mobile",
+                    "App Store" to "https://apps.apple.com/app/bnp-paribas"
                 )
             )
         ),

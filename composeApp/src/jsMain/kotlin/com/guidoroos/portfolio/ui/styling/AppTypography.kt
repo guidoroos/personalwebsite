@@ -18,6 +18,7 @@ object AppTypography {
     val sizeH2 = 2.0.cssRem
     val sizeH3 = 1.25.cssRem
     val sizeNav = 1.0.cssRem
+    val sizeBodyLarge = 1.1.cssRem
     val sizeBody = 1.0.cssRem
     val sizeSmall = 0.875.cssRem
     val sizeTiny = 0.75.cssRem

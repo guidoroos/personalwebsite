@@ -13,8 +13,8 @@ import org.jetbrains.compose.web.dom.*
 
 @Composable
 fun ProjectCard(project: Project, onClick: () -> Unit) {
-    val theme = LocalAppTheme.current
     val styles = LocalStyles.current
+    val theme = LocalAppTheme.current
 
     Div(attrs = {
         classes(styles.card)
@@ -26,23 +26,17 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
         onClick { onClick() }
     }) {
 
-        // 1. Label Sectie (Type & Klant)
+        // 1. Label Row
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
                 justifyContent(JustifyContent.SpaceBetween)
-                alignItems(AlignItems.Center)
                 marginBottom(AppSpacing.sm)
             }
         }) {
-            // De "Subtitle" logica voor Entity vs Client
             Span(attrs = {
-                style {
-                    fontSize(AppTypography.sizeTiny)
-                    fontWeight(AppTypography.weightBold)
-                    color(theme.primary)
-                    letterSpacing(AppTypography.lsWide)
-                }
+                classes(styles.tagLabel)
+                style { color(theme.primary) }
             }) {
                 val label = when (project.type) {
                     ProjectType.Employment -> "${project.entityName} @ ${project.clientName}"
@@ -52,43 +46,43 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
                 Text(label)
             }
 
-            // Periode
             Span(attrs = {
+                classes(styles.bodySmall)
                 style {
-                    fontSize(AppTypography.sizeTiny)
-                    color(theme.textSecondary)
+                    color(theme.textPrimary)
                 }
             }) {
-                val period = if (project.endDate == null) "${project.startDate} — Heden" else "${project.startDate} — ${project.endDate}"
+                // Year logic: Show one year if same or endDate is null and startDate is current year
+                val period = when {
+                    project.endDate == null -> "${project.startDate} — Heden"
+                    project.startDate == project.endDate -> project.startDate
+                    else -> "${project.startDate} — ${project.endDate}"
+                }
                 Text(period)
             }
         }
 
-        // 2. Titel
+        // 2. Title
         H3(attrs = {
-            style {
-                fontSize(AppTypography.sizeH3)
-                fontWeight(AppTypography.weightBold)
-                marginTop(0.px)
-                marginBottom(AppSpacing.xs)
-            }
+            classes(styles.h3Card)
+            style { marginTop(0.px); marginBottom(AppSpacing.xs) }
         }) {
             Text(project.title)
         }
 
-        // 3. Beschrijving
+        // 3. Description
         P(attrs = {
             classes(styles.bodySmall)
             style {
-                color(theme.textSecondary)
-                flex(1) // Zorgt dat de kaartjes in een grid even hoog lijken
+                flex(1)
                 marginBottom(AppSpacing.md)
+                color(theme.textSecondary)
             }
         }) {
             Text(project.shortDescription)
         }
 
-        // 4. Tech Stack
+        // 4. Tech Stack as Chips
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
@@ -97,17 +91,19 @@ fun ProjectCard(project: Project, onClick: () -> Unit) {
                 marginTop(AppSpacing.md)
             }
         }) {
-            val displayedTech = project.techStack.joinToString("  •  ")
-
-            Span(attrs = {
-                style {
-                    fontSize(AppTypography.sizeTiny)
-                    color(theme.textSecondary)
-                    fontWeight(AppTypography.weightBold)
-                    letterSpacing(1.px)
+            project.techStack.forEach { tech ->
+                Span(attrs = {
+                    classes(styles.tagLabel)
+                    style {
+                        color(theme.textPrimary)
+                        backgroundColor(theme.surfaceHover) // Subtle background for the chip
+                        padding(0.2.cssRem, 0.6.cssRem)
+                        borderRadius(12.px)
+                        fontSize(0.7.cssRem)
+                    }
+                }) {
+                    Text(tech)
                 }
-            }) {
-                Text(displayedTech)
             }
         }
     }

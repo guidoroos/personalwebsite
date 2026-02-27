@@ -5,6 +5,6 @@ data class ProjectDetail(
     val role: String,
     val solution: String,
     val keyAchievements: List<String>,
-    val productUrls: List<String> = emptyList(),
+    val productUrls: Map<String, String> = emptyMap(),
     val repoUrl: String? = null
 )

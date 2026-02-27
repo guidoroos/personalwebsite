@@ -5,6 +5,7 @@ import LocalStyles
 import androidx.compose.runtime.*
 import com.guidoroos.portfolio.data.model.NavigationItem
 import com.guidoroos.portfolio.data.model.Page
+import com.guidoroos.portfolio.ui.styling.AppSpacing
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
 
@@ -20,28 +21,52 @@ fun Navbar(
 ) {
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
+    val isDark = theme is DarkTheme
 
-    Nav(attrs = { classes(styles.navBar) }) {
+    Nav(attrs = {
+        classes(styles.navBar)
+
+        style {
+            position(Position.Fixed)
+            top(0.px)
+            left(0.px)
+            right(0.px)
+            width(100.percent)
+            height(48.px)
+
+            display(DisplayStyle.Flex)
+            justifyContent(JustifyContent.SpaceBetween)
+            padding(AppSpacing.lg)
+            property("box-sizing", "border-box")
+        }
+    }) {
         // TOP LEFT: Social Icons Row
         Div(attrs = {
             style {
+
                 display(DisplayStyle.Flex)
                 alignItems(AlignItems.Center)
                 gap(16.px)
             }
         }) {
-            UrlIcon(svgName = "github", url = "https://github.com/guidoroos")
+            UrlIcon(svgName = if (isDark) "githubDark" else "github", url = "https://github.com/guidoroos")
             UrlIcon(svgName = "linkedin", url = "https://linkedin.com/in/guido-roos91")
-            UrlIcon(svgName = "email", url = "mailto:guidoroos@protonmail.com")
-            UrlIcon(svgName = "cv", url = "https://rxresu.me/guidoroos/guido-roos")
+            UrlIcon(svgName = if (isDark)"emailDark" else "email", url = "mailto:guidoroos@protonmail.com")
+            UrlIcon(svgName = if (isDark) "cvDark" else "cv", url = "https://rxresu.me/guidoroos/guido-roos")
         }
+
+        Div(attrs = {
+            style {
+                flex(1)
+            }
+        })
 
         // RIGHT: Navigation Items & Theme Toggle
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
                 alignItems(AlignItems.Center)
-                gap(24.px)
+                gap(20.px)
             }
         }) {
             NavigationItem.entries.forEach { item ->

@@ -23,7 +23,7 @@ fun ProjectsPage(
 
         // Pagina Header
         H1 { Text(projectsPageData.title) }
-        P(attrs = { style { color(theme.textSecondary); marginBottom(AppSpacing.xl) } }) {
+        P(attrs = { style { color(theme.textSecondary); marginBottom(AppSpacing.lg) } }) {
             Text(projectsPageData.subtitle)
         }
 
@@ -35,7 +35,6 @@ fun ProjectsPage(
             onProjectSelect = onProjectSelect
         )
 
-        Hr(attrs = { classes(styles.divider) })
 
         // 2. LOONDIENST
         ProjectSection(
@@ -44,8 +43,6 @@ fun ProjectsPage(
             projects = projects.filter { it.type == ProjectType.Employment },
             onProjectSelect = onProjectSelect
         )
-
-        Hr(attrs = { classes(styles.divider) })
 
         // 3. SIDE PROJECTS
         ProjectSection(
@@ -68,12 +65,12 @@ fun ProjectSection(
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
 
-    Section(attrs = { style { marginBottom(AppSpacing.xl) } }) {
+    Section {
         H2 { Text(title) }
         P(attrs = {
             style {
                 color(theme.textSecondary);
-                marginBottom(AppSpacing.lg);
+                marginBottom(AppSpacing.md);
                 maxWidth(600.px)
             }
         }) { Text(subtitle) }
@@ -82,7 +79,7 @@ fun ProjectSection(
             style {
                 display(DisplayStyle.Grid)
                 property("grid-template-columns", "repeat(auto-fill, minmax(300px, 1fr))")
-                gap(AppSpacing.lg)
+                gap(AppSpacing.md)
             }
         }) {
             projects.forEach { project ->

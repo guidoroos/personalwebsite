@@ -41,6 +41,13 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
     }
 
     // --- Body Text ---
+    val bodyLarge by style {
+        fontSize(AppTypography.sizeBody)
+        fontWeight(AppTypography.weightNormal)
+        color(theme.textSecondary)
+        lineHeight(1.6.toString())
+    }
+
     val bodyRegular by style {
         fontSize(AppTypography.sizeBody)
         fontWeight(AppTypography.weightNormal)
@@ -72,7 +79,7 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
     }
 
     val tagLabel by style {
-        fontSize(0.75.cssRem)
+        fontSize(0.8.cssRem)
         fontWeight(AppTypography.weightMedium)
         property("text-transform", "uppercase")
     }
@@ -82,6 +89,8 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         maxWidth(AppSpacing.containerMaxWidth)
         flex(1)
         overflowY("auto")
+        paddingTop(64.px)
+
         property("margin", "0 auto")
 
         media("(max-width: 768px)") {
@@ -117,6 +126,7 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
     }
 
     val navLink by style {
+        fontSize(AppTypography.sizeBodyLarge)
         color(theme.textSecondary)
         property("cursor", "pointer")
         property("transition", "color 0.2s ease")
@@ -127,21 +137,38 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         }
     }
 
-    val divider by style {
-        height(1.px)
-        border(0.px)
-        backgroundColor(theme.border)
-        marginTop(AppSpacing.xl)
-        marginBottom(AppSpacing.xl)
-        opacity(0.3)
-        width(100.percent)
+    val ctaLink by style {
+        color(theme.kmpHighlight)
+        property("cursor", "pointer")
+        property("transition", "color 0.2s ease")
+
+        self + hover style {
+            color(theme.primary)
+        }
     }
+
 
     val backgroundPattern by style {
         backgroundColor(theme.background)
-        backgroundImage("radial-gradient(${theme.gridDot} 1.2px, transparent 0)")
-        property("background-size", "45px 45px")
+
+        // By using 100% spread, the colors "pool" in the corners and
+        // fade out across the whole screen, making the contrast easier to see.
+        backgroundImage(
+            "radial-gradient(at 0% 0%, ${theme.background2} 0%, transparent 100%), " +
+                    "radial-gradient(at 100% 100%, ${theme.background3} 0%, transparent 100%), " +
+                    "radial-gradient(at 50% 0%, ${theme.background2} 0%, transparent 80%)"
+        )
+
         backgroundAttachment("fixed")
-        property("transition", "background-color 0.4s ease-in-out")
+
+        property("transition", "background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), background-image 0.5s ease")
     }
+
+    val hoverIcon by style {
+        (self + hover) style {
+            property("transform", "scale(1.2)")
+        }
+    }
+
+
 }

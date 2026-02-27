@@ -13,4 +13,5 @@ object AppSpacing {
     // Layout specifieke tokens
     val containerMaxWidth = 1200.px
     val borderRadius = 8.px
+    val borderRadiusLarge = 16.px
 }

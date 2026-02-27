@@ -25,9 +25,12 @@ fun main() {
         val styles  = remember(theme) { AppStylesheet(theme) }
         Style(styles)
 
+        val currentYear = kotlin.js.Date().getFullYear()
+
         CompositionLocalProvider(LocalAppTheme provides theme) {
             // Root Container
             Div(attrs = {
+                classes(styles.backgroundPattern)
                 style {
                     display(DisplayStyle.Flex)
                     flexDirection(FlexDirection.Column)
@@ -43,9 +46,12 @@ fun main() {
                 ) { currentPage.value = it }
 
                 // --- MAIN CONTENT AREA ---
-                Main(attrs = { classes(styles.container) }) {
+                Main(attrs = {
+                    classes(styles.container) }) {
                     when (val page = currentPage.value) {
-                        Page.Home -> HomePage()
+                        Page.Home -> HomePage{pageToNavigate ->
+                            currentPage.value = pageToNavigate
+                        }
                         Page.Projects -> ProjectsPage { project ->
                             currentPage.value = Page.ProjectDetail(project)
                         }
@@ -58,15 +64,40 @@ fun main() {
 
                 // --- FOOTER ---
                 Footer(attrs = {
+                    // We keep the layout properties in the inline style for the container
+                    // but we could also move this to a 'footerContainer' class in your Stylesheet!
                     style {
                         property("margin-top", "auto")
                         padding(2.cssRem)
                         textAlign("center")
-                        color(theme.textSecondary)
-                        property("border-top", "1px solid ${theme.border}")
+                        property("border-top", "0.5px solid ${theme.border}")
+
+                        marginTop(40.px)
+                        marginLeft(40.px)
+                        marginRight(40.px)
                     }
                 }) {
-                    Text("© ${2026} Guido Roos - Senior Kotlin Developer")
+                    // The "Stand out" line using your custom highlight style
+                    Div(attrs = {
+                        classes(styles.bodyRegular)
+                        style {
+                            color(theme.primary)
+                            marginBottom(0.5.cssRem)
+                            fontWeight("bold") // Manual override to make it pop
+                        }
+                    }) {
+                        Text("Built with Kotlin Multiplatform for web")
+                    }
+
+                    // The standard copyright using your muted small text style
+                    Div(attrs = {
+                        classes(styles.bodySmall)
+                        style {
+                            color(theme.textMuted)
+                        }
+                    }) {
+                        Text("© $currentYear Guido Roos")
+                    }
                 }
             }
         }
