@@ -17,84 +17,38 @@ fun Navbar(
     currentPage: Page,
     toggleTheme: () -> Unit,
     onNavigate: (Page) -> Unit,
-
 ) {
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
     val isDark = theme is DarkTheme
 
-    Nav(attrs = {
-        classes(styles.navBar)
+    Nav(attrs = { classes(styles.navBar) }) {
 
-        style {
-            position(Position.Fixed)
-            top(0.px)
-            left(0.px)
-            right(0.px)
-            width(100.percent)
-            height(48.px)
-
-            display(DisplayStyle.Flex)
-            justifyContent(JustifyContent.SpaceBetween)
-            padding(AppSpacing.lg)
-            property("box-sizing", "border-box")
-        }
-    }) {
-        // TOP LEFT: Social Icons Row
-        Div(attrs = {
-            style {
-
-                display(DisplayStyle.Flex)
-                alignItems(AlignItems.Center)
-                gap(16.px)
-            }
-        }) {
+        // Socials
+        Div(attrs = { classes(styles.navSectionLeft) }) {
             UrlIcon(svgName = if (isDark) "githubDark" else "github", url = "https://github.com/guidoroos")
             UrlIcon(svgName = "linkedin", url = "https://linkedin.com/in/guido-roos91")
-            UrlIcon(svgName = if (isDark)"emailDark" else "email", url = "mailto:guidoroos@protonmail.com")
+            UrlIcon(svgName = if (isDark) "emailDark" else "email", url = "mailto:guidoroos@protonmail.com")
             UrlIcon(svgName = if (isDark) "cvDark" else "cv", url = "https://rxresu.me/guidoroos/guido-roos")
         }
 
+        // Navigation & Theme
         Div(attrs = {
-            style {
-                flex(1)
-            }
-        })
-
-        // RIGHT: Navigation Items & Theme Toggle
-        Div(attrs = {
-            style {
-                display(DisplayStyle.Flex)
-                alignItems(AlignItems.Center)
-                gap(20.px)
-            }
-        }) {
+            classes(styles.navSectionRight, styles.socialIconGroup) }) {
             NavigationItem.entries.forEach { item ->
                 val active = item.isActive(currentPage)
+
                 Span(attrs = {
                     classes(styles.navLink, styles.navLabel)
-                    if (active) {
-                        style {
-                            color(theme.primary)
-                            fontWeight(AppTypography.weightBold)
-                            property("border-bottom", "2px solid ${theme.primary}")
-                        }
-                    }
+                    if (active) classes(styles.navLinkActive)
                     onClick { onNavigate(item.rootPage) }
                 }) {
                     Text(item.label)
                 }
             }
 
-            // Theme Toggle
-            Span(attrs = {
-                classes(styles.navLink)
-                style { fontSize(1.2.em) }
-            }) {
-                val icon = if (theme is DarkTheme)  "sun" else "moon"
-                ActionIcon(svgName = icon) {
-                    toggleTheme()
-                }
+            ActionIcon(svgName = if (isDark) "sun" else "moon") {
+                toggleTheme()
             }
         }
     }

@@ -16,28 +16,17 @@ fun ActionIcon(
     val styles = LocalStyles.current
 
     Div(attrs = {
+        classes(styles.iconMaskBase, styles.hoverIcon)
+
         onClick { onClickAction() }
 
-        classes(styles.hoverIcon)
-
         style {
-            display(DisplayStyle.Flex) // Change to Flex to center the mask perfectly
-            justifyContent(JustifyContent.Center)
-            alignItems(AlignItems.Center)
-
-            width(32.px)
-            height(32.px)
-            cursor("pointer")
-
+            // Dynamic mask path based on the svgName
             val iconPath = "url('$svgName.svg')"
             property("-webkit-mask-image", iconPath)
             property("mask-image", iconPath)
-            property("mask-repeat", "no-repeat")
-            property("mask-position", "center")
-            property("mask-size", "95%")
 
-
-            backgroundColor(theme.iconBase)
+            // Apply any extra overrides (like margin or specific color)
             styleModifier()
         }
     })

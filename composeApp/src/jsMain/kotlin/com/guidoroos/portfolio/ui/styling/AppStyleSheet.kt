@@ -117,12 +117,23 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
     }
 
     val navBar by style {
+        // Your base styles
         display(DisplayStyle.Flex)
         justifyContent(JustifyContent.SpaceBetween)
         alignItems(AlignItems.Center)
         padding(AppSpacing.md, AppSpacing.lg)
         backgroundColor(theme.surface)
         property("border-bottom", "1px solid ${theme.border}")
+
+        // Structural styles for the fixed top bar
+        position(Position.Fixed)
+        top(0.px)
+        left(0.px)
+        right(0.px)
+        height(48.px)
+        width(100.percent)
+        property("z-index", "1000")
+        property("box-sizing", "border-box")
     }
 
     val navLink by style {
@@ -154,7 +165,7 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         // By using 100% spread, the colors "pool" in the corners and
         // fade out across the whole screen, making the contrast easier to see.
         backgroundImage(
-            "radial-gradient(at 0% 0%, ${theme.background2} 0%, transparent 100%), " +
+            "radial-gradient(at 0% 0%, ${theme.background} 0%, transparent 100%), " +
                     "radial-gradient(at 100% 100%, ${theme.background3} 0%, transparent 100%), " +
                     "radial-gradient(at 50% 0%, ${theme.background2} 0%, transparent 80%)"
         )
@@ -168,6 +179,82 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         (self + hover) style {
             property("transform", "scale(1.2)")
         }
+    }
+// --- Navbar Styles ---
+
+
+    val navSectionLeft by style {
+        display(DisplayStyle.Flex)
+        alignItems(AlignItems.Center)
+        gap(16.px)
+
+        media("(max-width: 768px)") {
+            self style {
+                gap(8.px)
+
+            }
+        }
+    }
+
+    val navSectionRight by style {
+        display(DisplayStyle.Flex)
+        alignItems(AlignItems.Center)
+        gap(20.px)
+
+        media("(max-width: 768px)") {
+            self style {
+                gap(10.px)
+
+            }
+        }
+    }
+
+    val navLinkActive by style {
+        color(theme.primary)
+        fontWeight(AppTypography.weightBold)
+        property("border-bottom", "2px solid ${theme.primary}")
+    }
+
+    val iconMaskBase by style {
+        display(DisplayStyle.Flex)
+        justifyContent(JustifyContent.Center)
+        alignItems(AlignItems.Center)
+
+        width(28.px)  // Slightly smaller base size
+        height(28.px)
+        cursor("pointer")
+
+        property("mask-repeat", "no-repeat")
+        property("mask-position", "center")
+        property("mask-size", "90%") // Slightly smaller icon inside the container
+        property("-webkit-mask-repeat", "no-repeat")
+        property("-webkit-mask-position", "center")
+        property("-webkit-mask-size", "90%")
+
+        backgroundColor(theme.iconBase)
+
+        // Smooth color transition for theme switching
+        property("transition", "background-color 0.2s ease")
+    }
+
+    val socialIconGroup by style {
+        display(DisplayStyle.Flex)
+        alignItems(AlignItems.Center)
+        gap(16.px)
+
+        media("(max-width: 768px)") {
+            self style {
+                gap(8.px) // Tighten up on mobile
+            }
+        }
+    }
+
+    val iconLinkFrame by style {
+        display(DisplayStyle.Flex)
+        justifyContent(JustifyContent.Center)
+        alignItems(AlignItems.Center)
+        width(32.px)
+        height(32.px)
     }
 
 

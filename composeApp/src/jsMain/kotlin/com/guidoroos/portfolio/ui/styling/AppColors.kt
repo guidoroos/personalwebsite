@@ -33,8 +33,8 @@ object DarkTheme : AppTheme {
     override val locationPin = Color("#f43f5e")
     override val success = Color("#10b981")
     override val background = Color("#0b0f1a")
-    override val background2 = Color("#1e293b59")
-    override val background3 = Color("#05070a")
+    override val background2 = Color("#1e293b") // Slate 800 - Classy, visible navy
+    override val background3 = Color("#1e1b4b")
     override val surface = Color("#161e2d")
     override val surfaceVariant = Color("#232d3f")
     override val surfaceHover = Color("#1e293b")
@@ -51,9 +51,9 @@ object LightTheme : AppTheme {
     override val kmpHighlight = Color("#6FB31B")
     override val locationPin = Color("#e11d48")
     override val success = Color("#059669")
-    override val background = Color("#f8fafc")
-    override val background2 = Color("#f1f5f9b3")
-    override val background3 = Color("#f8fafc")
+    override val background = Color("#ffffff")
+    override val background2 = Color("#e0f2fe") // Sky 100 - Clearly blue
+    override val background3 = Color("#ede9fe")
     override val surface = Color("#ffffff")
     override val surfaceVariant = Color("#F5F3FF")
     override val surfaceHover = Color("#f1f5f9")
