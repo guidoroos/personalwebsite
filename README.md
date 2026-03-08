@@ -2,6 +2,7 @@
 
 A performant responsive personal website built entirely with **Kotlin Multiplatform** and **Compose HTML**. This project serves as a live demonstration of code-sharing capabilities across the full stack—bridging the gap between mobile logic and web presentation. This repository functions as my primary professional portfolio, designed with a custom light-mode variant to stand out while showcasing my technical expertise.
 
+🔗 **[Bekijk mijn volledige portfolio & projecten](https://guidoroos.github.io/personalwebsite/)**
 
 ### 🚀 The Kotlin-on-Web Potential
 This portfolio is a proof-of-concept for **Unified Development**. By moving beyond traditional JS/TS frameworks, this architecture allows for:
