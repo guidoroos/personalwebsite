@@ -1,42 +1,36 @@
-This is a Kotlin Multiplatform project targeting Web.
+# 🌐 KMP Personal Portfolio (Kotlin/JS + Compose HTML)
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+A performant responsive personal website built entirely with **Kotlin Multiplatform** and **Compose HTML**. This project serves as a live demonstration of code-sharing capabilities across the full stack—bridging the gap between mobile logic and web presentation. This repository functions as my primary professional portfolio, designed with a custom light-mode variant to stand out while showcasing my technical expertise.
 
-### Build and Run Web Application
 
-To build and run the development version of the web app, use the run configuration from the run widget
-in your IDE's toolbar or run it directly from the terminal:
-- for the Wasm target (faster, modern browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:wasmJsBrowserDevelopmentRun
-    ```
-- for the JS target (slower, supports older browsers):
-  - on macOS/Linux
-    ```shell
-    ./gradlew :composeApp:jsBrowserDevelopmentRun
-    ```
-  - on Windows
-    ```shell
-    .\gradlew.bat :composeApp:jsBrowserDevelopmentRun
-    ```
+### 🚀 The Kotlin-on-Web Potential
+This portfolio is a proof-of-concept for **Unified Development**. By moving beyond traditional JS/TS frameworks, this architecture allows for:
+* **True Type-Safety:** Catching UI and logic errors at compile-time across the entire stack, significantly reducing production bugs.
+* **Shared Business Logic:** The exact same data models and validation logic used here can be dropped into an Android or iOS app without modification.
+* **Custom UI Engineering:** A "light mode" implementation featuring a variant designed to stand out from generic templates.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
-[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
-[Kotlin/Wasm](https://kotl.in/wasm/)…
+### 🛠 The Tech Stack
+* **Language:** 100% Kotlin
+* **Framework:** Compose HTML (Jetbrains Compose Multiplatform)
+* **Target:** Kotlin/JS (Browser)
+* **Architecture:** Component-based UI with shared state management
 
-We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
-If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+### ⚙️ Key Engineering Features
+* **Multiplatform Gradle Setup:** Clean version catalog implementation using `libs.versions.toml`.
+* **Responsive Compose Logic:** Custom CSS-in-Kotlin styling to handle various screen sizes seamlessly.
+
+
+### 🤝 Available for Hire
+I specialize in **KMP, Mobile Native (Kotlin/Swift)**. 
+
+**[Contact me via LinkedIn](https://www.linkedin.com/in/guido-roos9)**
+
+---
+
+### 🛠 Build and Run Web Application
+
+* **on macOS/Linux**
+  ```shell
+  ./gradlew :composeApp:jsBrowserDevelopmentRun
