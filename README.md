@@ -25,7 +25,7 @@ This portfolio is a proof-of-concept for **Unified Development**. By moving beyo
 ### 🤝 Available for Hire
 I specialize in **KMP, Mobile Native (Kotlin/Swift)**. 
 
-**[Contact me via LinkedIn](https://www.linkedin.com/in/guido-roos9)**
+**[Contact me via LinkedIn](https://www.linkedin.com/in/guido-roos91)**
 
 ---
 
