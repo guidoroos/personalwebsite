@@ -141,7 +141,7 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         color(theme.textSecondary)
         property("cursor", "pointer")
         property("transition", "color 0.2s ease")
-        marginLeft(AppSpacing.md)
+
 
         self + hover style {
             color(theme.primary)
@@ -231,6 +231,11 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         property("border-bottom", "2px solid ${theme.primary}")
     }
 
+    val navLinkActiveNoUnderline by style {
+        color(theme.primary)
+        fontWeight(AppTypography.weightBold)
+    }
+
     val iconMaskBase by style {
         display(DisplayStyle.Flex)
         justifyContent(JustifyContent.Center)
@@ -291,6 +296,29 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         media("(max-width: 768px)") {
             self style {
                 display(DisplayStyle.None)
+            }
+        }
+    }
+
+    val projectGrid by style {
+        display(DisplayStyle.Grid)
+        gap(AppSpacing.md)
+
+        // Standaard voor mobiel
+        gridTemplateColumns("1fr")
+
+        // We injecteren de media queries handmatig als 'raw' properties
+        // Dit dwingt de CSS compiler om ze letterlijk over te nemen
+
+        media("screen and (min-width: 768px)") {
+            self style {
+                gridTemplateColumns("repeat(2, 1fr)")
+            }
+        }
+
+        media("screen and (min-width: 1024px)") {
+            self style {
+                gridTemplateColumns("repeat(3, 1fr)")
             }
         }
     }

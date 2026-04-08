@@ -35,7 +35,7 @@ object DarkTheme : AppTheme {
     override val background = Color("#0b0f1a")
     override val background2 = Color("#1e293b") // Slate 800 - Classy, visible navy
     override val background3 = Color("#1e1b4b")
-    override val surface = Color("#161e2d")
+    override val surface = Color("#1c2638")
     override val surfaceVariant = Color("#232d3f")
     override val surfaceHover = Color("#1e293b")
     override val border = Color("#1e293b")
@@ -55,7 +55,7 @@ object LightTheme : AppTheme {
     override val background2 = Color("#e0f2fe") // Sky 100 - Clearly blue
     override val background3 = Color("#ede9fe")
     override val surface = Color("#ffffff")
-    override val surfaceVariant = Color("#F5F3FF")
+    override val surfaceVariant = Color("#F8FAFC")
     override val surfaceHover = Color("#f1f5f9")
     override val border = Color("#e2e8f0")
     override val gridDot = Color("#cbd5e1")

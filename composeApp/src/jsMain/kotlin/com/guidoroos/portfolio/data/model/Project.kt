@@ -1,8 +1,8 @@
 package com.guidoroos.portfolio.data.model
 
 enum class ProjectType(val label: String) {
-    Employment("Loondienst"),
     Freelance("Freelance"),
+    Employment("Loondienst"),
     SideProject("Side Project")
 }
 
@@ -17,5 +17,6 @@ data class Project(
     val startDate: String,
     val endDate: String? = null,
     val techStack: List<String>,
-    val details: ProjectDetail
+    val details: ProjectDetail,
+    val shouldHighlight: Boolean = false
 )

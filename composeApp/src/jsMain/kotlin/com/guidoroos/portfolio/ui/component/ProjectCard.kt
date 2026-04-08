@@ -2,6 +2,7 @@ package com.guidoroos.portfolio.ui.component
 
 
 import LocalAppTheme
+import LocalLanguage
 import LocalStyles
 import androidx.compose.runtime.Composable
 import com.guidoroos.portfolio.data.model.Project
@@ -12,94 +13,117 @@ import org.jetbrains.compose.web.dom.*
 
 
 @Composable
-fun ProjectCard(project: Project, onClick: () -> Unit) {
+fun ProjectCard(project: Project, onClick:(Project) -> Unit) {
     val styles = LocalStyles.current
     val theme = LocalAppTheme.current
+    val currentLanguage = LocalLanguage.current
 
     Div(attrs = {
         classes(styles.card)
         style {
             cursor("pointer")
+            padding(AppSpacing.md)
             display(DisplayStyle.Flex)
             flexDirection(FlexDirection.Column)
+            gap(4.px)
+            minHeight(160.px)
         }
-        onClick { onClick() }
+        onClick { onClick(project) }
     }) {
-
-        // 1. Label Row
+        // 1. Bedrijfsnaam als de "Main" Title
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
                 justifyContent(JustifyContent.SpaceBetween)
-                marginBottom(AppSpacing.sm)
+                alignItems(AlignItems.Center)
+                paddingBottom(AppSpacing.md)
             }
         }) {
-            Span(attrs = {
-                classes(styles.tagLabel)
-                style { color(theme.primary) }
-            }) {
-                val label = when (project.type) {
-                    ProjectType.Employment -> "${project.entityName} @ ${project.clientName}"
-                    ProjectType.Freelance -> project.clientName ?: project.entityName
-                    ProjectType.SideProject -> "Side Project"
+            H3(attrs = {
+                style {
+                    margin(0.px)
+                    fontSize(1.1.cssRem)
+                    fontWeight("bold")
+
+                    color(theme.primary) // Bedrijf in de accentkleur
                 }
-                Text(label)
+            }) {
+                val entityLabel = when (project.type) {
+                    ProjectType.Employment -> project.clientName ?: project.entityName
+                    else -> project.entityName
+                }
+                Text(entityLabel.uppercase())
             }
 
             Span(attrs = {
-                classes(styles.bodySmall)
                 style {
-                    color(theme.textPrimary)
+                    fontSize(0.8.cssRem)
+                    opacity(0.6)
                 }
             }) {
-                // Year logic: Show one year if same or endDate is null and startDate is current year
-                val period = when {
-                    project.endDate == null -> "${project.startDate} — Heden"
-                    project.startDate == project.endDate -> project.startDate
-                    else -> "${project.startDate} — ${project.endDate}"
+                Text(if (project.startDate == project.endDate) {
+                    project.startDate
+                } else if (project.endDate == null) {
+                    "${project.startDate} - ${if (currentLanguage == AppLanguage.NL) "heden" else "present"}"
+                }  else  {
+                    "${project.startDate} - ${project.endDate} "
                 }
-                Text(period)
+                )
             }
         }
 
-        // 2. Title
-        H3(attrs = {
-            classes(styles.h3Card)
-            style { marginTop(0.px); marginBottom(AppSpacing.xs) }
+        // 2. Project Titel (Nu kleiner/subtieler)
+        Span(attrs = {
+            style {
+                fontSize(0.95.cssRem)
+                fontWeight(600)
+                color(theme.textPrimary)
+            }
         }) {
             Text(project.title)
         }
 
-        // 3. Description
+        // 3. Beschrijving (Compacter)
         P(attrs = {
-            classes(styles.bodySmall)
             style {
-                flex(1)
-                marginBottom(AppSpacing.md)
+                fontSize(0.90.cssRem)
+                margin(AppSpacing.xs, 0.px)
                 color(theme.textSecondary)
+                // Limiteer tot 2 regels om kaarten gelijk te houden
+                property("display", "-webkit-box")
+                property("-webkit-line-clamp", "2")
+                property("-webkit-box-orient", "vertical")
+                overflow("hidden")
             }
         }) {
             Text(project.shortDescription)
         }
 
-        // 4. Tech Stack as Chips
+        Div(attrs = {
+            style {
+                flex(1)
+                minHeight(AppSpacing.xs)
+            }
+        })
+
+        // 4. Tech Tags (Kleiner en cleaner)
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
                 flexWrap(FlexWrap.Wrap)
-                gap(AppSpacing.xs)
-                marginTop(AppSpacing.md)
+                gap(6.px)
+                marginTop(AppSpacing.xs)
             }
         }) {
-            project.techStack.forEach { tech ->
+            project.techStack.take(4).forEach { tech -> // Toon max 4 om grootte te beperken
                 Span(attrs = {
-                    classes(styles.tagLabel)
                     style {
+                        fontSize(0.8.cssRem)
                         color(theme.textPrimary)
-                        backgroundColor(theme.surfaceHover) // Subtle background for the chip
-                        padding(0.2.cssRem, 0.6.cssRem)
-                        borderRadius(12.px)
-                        fontSize(0.7.cssRem)
+                        backgroundColor(theme.surfaceHover)
+                        padding(2.px, 8.px)
+                        borderRadius(4.px)
+                        opacity(0.8)
                     }
                 }) {
                     Text(tech)

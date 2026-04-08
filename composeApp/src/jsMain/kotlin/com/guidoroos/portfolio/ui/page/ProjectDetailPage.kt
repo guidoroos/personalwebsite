@@ -31,42 +31,51 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                 gap(AppSpacing.xs)
                 marginBottom(AppSpacing.xl)
                 marginLeft(0.px)
+                cursor("pointer")
             }
             onClick { onBack() }
         }) {
             Text("← Terug naar overzicht")
         }
 
-        // 2. Header
+        // 2. Header (Reversed Importance)
         Header(attrs = { style { marginBottom(AppSpacing.lg) } }) {
-            Div(attrs = {
-                classes(styles.tagLabel)
-                style { color(theme.primary); marginBottom(AppSpacing.xs) }
+            // Priority 1: De Opdrachtgever / Entiteit
+            H2(attrs = {
+                classes(styles.h2Section)
+                style {
+                    color(theme.primary)
+                    marginTop(0.px)
+                    marginBottom(0.25.cssRem)
+                }
             }) {
-                val context =
-                    if (project.clientName != null) "${project.clientName} via ${project.entityName}" else project.entityName
-                Text("$context • ${project.startDate}${project.endDate?.let { " — $it" } ?: " — Heden"}")
+                val context = if (project.clientName != null) "${project.clientName} via ${project.entityName}" else project.entityName
+                Text(context)
             }
 
-            H2(attrs = {
-                classes(styles.h2Section);
+            // Priority 2: Project Titel
+            Div(attrs = {
+                classes(styles.h3Card)
                 style {
                     color(theme.textPrimary)
-                    marginTop(0.px);
+                    fontWeight("bold")
+                    fontSize(1.25.cssRem)
                     marginBottom(0.5.cssRem)
                 }
             }) {
                 Text(project.title)
             }
 
+            // Priority 3: Metadata (Rol & Datum)
             Div(attrs = {
-                classes(styles.h3Card);
+                classes(styles.tagLabel)
                 style {
-                    fontWeight("bold")
                     color(theme.textSecondary)
+                    fontSize(0.9.cssRem)
                 }
             }) {
-                Text(project.details.role)
+                val dateRange = "${project.startDate}${project.endDate?.let { " — $it" } ?: " — Heden"}"
+                Text("${project.details.role} • $dateRange")
             }
         }
 
@@ -78,7 +87,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
         }
 
         project.details.let { details ->
-            // 4. Tight Content Grid (Back to the 300px min-max)
+            // 4. Tight Content Grid
             Div(attrs = {
                 style {
                     display(DisplayStyle.Flex)
@@ -91,9 +100,10 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     property("margin-right", "auto")
                 }
             }) {
-                Section(attrs = { classes(styles.card) }) {
+                Section(attrs = { classes(styles.card);
+                    style { width(90.percent) } }) {
                     Div(attrs = {
-                        classes(styles.h3Card);
+                        classes(styles.h3Card)
                         style {
                             color(theme.textPrimary)
                             marginBottom(AppSpacing.xs)
@@ -103,15 +113,13 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     }
                     Div(attrs = {
                         classes(styles.bodySmall)
-                        style {
-                            color(theme.textSecondary)
-                        }
+                        style { color(theme.textSecondary) }
                     }) { Text(details.challenge) }
                 }
 
-                Section(attrs = { classes(styles.card) }) {
+                Section(attrs = { classes(styles.card); style { width(90.percent) } }) {
                     Div(attrs = {
-                        classes(styles.h3Card);
+                        classes(styles.h3Card)
                         style {
                             marginBottom(AppSpacing.xs)
                             color(theme.textPrimary)
@@ -121,9 +129,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     }
                     Div(attrs = {
                         classes(styles.bodySmall)
-                        style {
-                            color(theme.textSecondary)
-                        }
+                        style { color(theme.textSecondary) }
                     }) { Text(details.solution) }
                 }
             }
@@ -132,20 +138,28 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
             Section(attrs = {
                 style {
                     marginBottom(AppSpacing.xl)
+                    display(DisplayStyle.Flex)
+                    flexDirection(FlexDirection.Column)
                     alignItems(AlignItems.Center)
                 }
             }) {
-                Div(attrs = { classes(styles.h2Section); style { marginBottom(AppSpacing.md) } }) {
+                Div(attrs = {
+                    classes(styles.h2Section)
+                    style {
+                        marginBottom(AppSpacing.md)
+                        textAlign("center")
+                    }
+                }) {
                     Text("Resultaten")
                 }
-                Ul(attrs = { style { listStyleType("none"); padding(0.px) } }) {
+                Ul(attrs = { style { listStyleType("none"); padding(0.px); margin(0.px) } }) {
                     details.keyAchievements.forEach { achievement ->
                         Li(attrs = {
                             classes(styles.bodyRegular)
                             style {
-                                marginBottom(AppSpacing.sm); display(DisplayStyle.Flex); gap(
-                                AppSpacing.sm
-                            )
+                                marginBottom(AppSpacing.sm)
+                                display(DisplayStyle.Flex)
+                                gap(AppSpacing.sm)
                             }
                         }) {
                             Span(attrs = { style { color(theme.primary) } }) { Text("•") }
@@ -165,9 +179,10 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                 // Tech Chips
                 Div(attrs = {
                     style {
-                        display(DisplayStyle.Flex); flexWrap(FlexWrap.Wrap); gap(AppSpacing.xs); marginBottom(
-                        AppSpacing.xl
-                    )
+                        display(DisplayStyle.Flex)
+                        flexWrap(FlexWrap.Wrap)
+                        gap(AppSpacing.xs)
+                        marginBottom(AppSpacing.xl)
                     }
                 }) {
                     project.techStack.forEach { tech ->
@@ -184,12 +199,12 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     }
                 }
 
-                // Links from Map
+                // Links
                 Div(attrs = {
                     style {
-                        display(DisplayStyle.Flex); flexWrap(FlexWrap.Wrap); gap(
-                        AppSpacing.xl
-                    )
+                        display(DisplayStyle.Flex)
+                        flexWrap(FlexWrap.Wrap)
+                        gap(AppSpacing.xl)
                     }
                 }) {
                     details.productUrls.forEach { (name, url) ->

@@ -1,22 +1,31 @@
 package com.guidoroos.portfolio.ui.page
 
 import LocalAppTheme
+import LocalLanguage
 import LocalStyles
 import androidx.compose.runtime.Composable
-import com.guidoroos.portfolio.data.content.ProjectContent.projects
+import com.guidoroos.portfolio.data.content.HomePageContentEN
+import com.guidoroos.portfolio.data.content.HomePageContentNL
+import com.guidoroos.portfolio.data.content.ProjectContentEN
+import com.guidoroos.portfolio.data.content.ProjectContentNL
 import com.guidoroos.portfolio.ui.styling.*
 import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.*
-import com.guidoroos.portfolio.data.content.homePageContent
 import com.guidoroos.portfolio.data.model.Page
 import com.guidoroos.portfolio.ui.component.ActionIcon
-import com.guidoroos.portfolio.ui.component.ProjectCard
 import com.guidoroos.portfolio.ui.component.StandoutProjectCard
+import com.guidoroos.portfolio.util.rememberWindowWidth
+import kotlin.math.max
 
 @Composable
 fun HomePage(onNavigate: (Page) -> Unit) {
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
+    val language = LocalLanguage.current
+    val projects =
+        if (language == AppLanguage.NL) ProjectContentNL.projects else ProjectContentEN.projects
+    val homePageContent = if (language == AppLanguage.NL) HomePageContentNL else HomePageContentEN
+    val windowWidth = rememberWindowWidth()
 
     Div(attrs = {
         style {
@@ -24,24 +33,42 @@ fun HomePage(onNavigate: (Page) -> Unit) {
             flexDirection(FlexDirection.Column)
             alignItems(AlignItems.Center)
             textAlign("center")
-            gap(AppSpacing.sm)
+            gap(AppSpacing.xs) // Iets strakker op elkaar
             paddingTop(AppSpacing.md)
             paddingBottom(AppSpacing.xl)
         }
     }) {
-        // 1. Hero Header
-        H1(attrs = { classes(styles.h1Hero) }) {
+        // 1. Jouw Naam
+        H1(attrs = {
+            classes(styles.h1Hero)
+            style { marginBottom(4.px) }
+        }) {
             Text(homePageContent.fullName)
         }
+
+        // 2. De "Zakelijke" subtitel (Subtiel grijs)
+        Span(attrs = {
+            style {
+                opacity(0.6)
+                fontSize(1.3.cssRem)
+                marginBottom(8.px)
+            }
+        }) {
+            Text("Roos Mobile") // Of "Consultancy via Roos Mobile"
+        }
+
+        // 3. Je Rol (In kleur)
         H2(attrs = {
             style {
-                marginTop((-16).px)
                 color(theme.primary)
                 fontSize(1.5.cssRem)
+                fontWeight("bold")
+                marginTop(0.px)
             }
         }) {
             Text(homePageContent.title)
         }
+
 
         // 2. Profile Image
         Img(
@@ -61,10 +88,11 @@ fun HomePage(onNavigate: (Page) -> Unit) {
 
         // 3. The Pitch & Location
         Div(attrs = { style { maxWidth(800.px); padding(0.px, AppSpacing.md) } }) {
-            P(attrs = { classes(styles.bodyRegular);
+            P(attrs = {
+                classes(styles.bodyRegular);
                 style {
-                marginTop(AppSpacing.lg)
-                property("white-space", "pre-line")
+                    marginTop(AppSpacing.lg)
+                    property("white-space", "pre-line")
                 }
             }) {
                 Text(homePageContent.kmpPitch)
@@ -149,20 +177,22 @@ fun HomePage(onNavigate: (Page) -> Unit) {
 
         // 1. The Grid Container
         Div(attrs = {
+            classes(styles.projectGrid)
             style {
-                display(DisplayStyle.Grid)
-                // Responsive 3-column target
-                gridTemplateColumns("repeat(auto-fit, minmax(280px, 1fr))")
-                gap(AppSpacing.md)
-                // Removed marginBottom to close the gap to the button
-                width(100.percent)
+                maxWidth (900.px)
             }
         }) {
-            projects.forEach { project ->
-                StandoutProjectCard(project) { selectedProject ->
-                    onNavigate(Page.ProjectDetail(project = selectedProject))
+            val itemsToShow = if (windowWidth > 900) 6 else 4
+
+            projects
+                .filter { it.shouldHighlight }
+                .sortedBy { it.type }
+                .take(itemsToShow)
+                .forEach { project ->
+                    StandoutProjectCard(project) { selectedProject ->
+                        onNavigate(Page.ProjectDetail(project = selectedProject))
+                    }
                 }
-            }
         }
 
 // 2. The Text Button (No vertical spacing)
@@ -195,7 +225,9 @@ fun HomePage(onNavigate: (Page) -> Unit) {
         Div(attrs = {
             style {
                 marginTop(AppSpacing.lg)
-                padding(AppSpacing.md)
+                paddingLeft(AppSpacing.xl)
+                paddingRight(AppSpacing.xl)
+                paddingTop(AppSpacing.md)
                 paddingBottom(AppSpacing.lg)
                 backgroundColor(theme.surfaceVariant)
                 borderRadius(AppSpacing.borderRadiusLarge)
@@ -209,7 +241,7 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                 property("box-shadow", "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)")
             }
         }) {
-            H3(attrs = { classes(styles.navLabel); }) {
+            H3(attrs = { classes(styles.h3Card); }) {
                 Text(homePageContent.ctaTitle)
             }
             A(href = "mailto:${homePageContent.ctaEmail}", attrs = {

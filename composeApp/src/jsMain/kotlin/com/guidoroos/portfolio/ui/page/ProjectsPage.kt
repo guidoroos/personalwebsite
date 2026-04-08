@@ -1,7 +1,8 @@
-
 import androidx.compose.runtime.Composable
-import com.guidoroos.portfolio.data.content.projectsPageData
-import com.guidoroos.portfolio.data.content.ProjectContent.projects
+import com.guidoroos.portfolio.data.content.ProjectContentEN
+import com.guidoroos.portfolio.data.content.ProjectContentNL
+import com.guidoroos.portfolio.data.content.projectsPageDataEN
+import com.guidoroos.portfolio.data.content.projectsPageDataNL
 import com.guidoroos.portfolio.data.model.Project
 import com.guidoroos.portfolio.data.model.ProjectType
 import com.guidoroos.portfolio.ui.component.ProjectCard
@@ -18,6 +19,11 @@ fun ProjectsPage(
 ) {
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
+    val language = LocalLanguage.current
+    val projectsPageData =
+        if (language == AppLanguage.NL) projectsPageDataNL else projectsPageDataEN
+    val projects =
+        if (language == AppLanguage.NL) ProjectContentNL.projects else ProjectContentEN.projects
 
     Div(attrs = { classes(styles.container) }) {
 
@@ -65,22 +71,27 @@ fun ProjectSection(
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
 
-    Section {
+    Section(attrs = {
+        style {
+            display(DisplayStyle.Flex)
+            flexDirection(FlexDirection.Column)
+            alignItems(AlignItems.Center) // Centreert items horizontaal
+            textAlign("center")           // Centreert tekst binnen de items
+            width(100.percent)
+        }
+    }) {
         H2 { Text(title) }
+
         P(attrs = {
             style {
-                color(theme.textSecondary);
-                marginBottom(AppSpacing.md);
+                color(theme.textSecondary)
+                marginBottom(AppSpacing.md)
                 maxWidth(600.px)
             }
         }) { Text(subtitle) }
 
         Div(attrs = {
-            style {
-                display(DisplayStyle.Grid)
-                property("grid-template-columns", "repeat(auto-fill, minmax(300px, 1fr))")
-                gap(AppSpacing.md)
-            }
+            classes(styles.projectGrid)
         }) {
             projects.forEach { project ->
                 ProjectCard(project, onClick = { onProjectSelect(project) })

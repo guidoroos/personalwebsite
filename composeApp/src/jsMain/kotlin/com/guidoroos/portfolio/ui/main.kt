@@ -11,23 +11,31 @@ import com.guidoroos.portfolio.ui.page.ProjectDetailPage
 import com.guidoroos.portfolio.ui.styling.AppTheme
 import com.guidoroos.portfolio.ui.styling.DarkTheme
 import com.guidoroos.portfolio.ui.styling.LightTheme
+import com.guidoroos.portfolio.util.currentYear
+import com.guidoroos.portfolio.util.getBrowserLanguage
 import com.guidoroos.portfolio.util.isSystemInDarkMode
 
 
 val LocalAppTheme = staticCompositionLocalOf<AppTheme> { DarkTheme }
 val LocalStyles = staticCompositionLocalOf { AppStylesheet(DarkTheme) }
 
+enum class AppLanguage { NL, EN }
+
+val LocalLanguage = staticCompositionLocalOf { AppLanguage.EN }
+
 fun main() {
     renderComposable(rootElementId = "root") {
         val currentPage = remember { mutableStateOf<Page>(Page.Home) }
         var isDark by remember { mutableStateOf(isSystemInDarkMode()) }
         val theme = if (isDark) DarkTheme else LightTheme
-        val styles  = remember(theme) { AppStylesheet(theme) }
+        val styles = remember(theme) { AppStylesheet(theme) }
         Style(styles)
+        var currentLang by remember { mutableStateOf(getBrowserLanguage()) }
 
-        val currentYear = kotlin.js.Date().getFullYear()
-
-        CompositionLocalProvider(LocalAppTheme provides theme) {
+        CompositionLocalProvider(
+            LocalAppTheme provides theme,
+            LocalLanguage provides currentLang
+        ) {
             // Root Container
             Div(attrs = {
                 classes(styles.backgroundPattern)
@@ -42,16 +50,19 @@ fun main() {
                 // --- NAVBAR COMPONENT ---
                 Navbar(
                     currentPage = currentPage.value,
-                    toggleTheme = { isDark = !isDark }
+                    toggleTheme = { isDark = !isDark },
+                    setLanguage = {currentLang = it},
                 ) { currentPage.value = it }
 
                 // --- MAIN CONTENT AREA ---
                 Main(attrs = {
-                    classes(styles.container) }) {
+                    classes(styles.container)
+                }) {
                     when (val page = currentPage.value) {
-                        Page.Home -> HomePage{pageToNavigate ->
+                        Page.Home -> HomePage { pageToNavigate ->
                             currentPage.value = pageToNavigate
                         }
+
                         Page.Projects -> ProjectsPage { project ->
                             currentPage.value = Page.ProjectDetail(project)
                         }

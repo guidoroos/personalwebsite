@@ -2,15 +2,18 @@ package com.guidoroos.portfolio.data.model
 
 
 enum class NavigationItem(
-    val label: String,
+    val labelNL: String,
+    val labelEN: String,
     val rootPage: Page,
 ) {
     Home(
-        label = "Home",
+        labelEN = "Home",
+        labelNL = "Home",
         rootPage = Page.Home,
     ),
     Projects(
-        label = "Projects",
+        labelEN = "Projects",
+        labelNL = "Projecten",
         rootPage = Page.Projects,
     );
 
