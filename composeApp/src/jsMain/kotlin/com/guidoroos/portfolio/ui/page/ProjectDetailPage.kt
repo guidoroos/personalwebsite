@@ -1,10 +1,12 @@
 package com.guidoroos.portfolio.ui.page
 
 import LocalAppTheme
+import LocalLanguage
 import LocalStyles
 import androidx.compose.runtime.Composable
 import com.guidoroos.portfolio.data.model.Project
 import com.guidoroos.portfolio.ui.styling.AppSpacing
+import com.guidoroos.portfolio.ui.styling.AppTypography
 import org.jetbrains.compose.web.attributes.ATarget
 import org.jetbrains.compose.web.attributes.target
 import org.jetbrains.compose.web.css.*
@@ -14,6 +16,7 @@ import org.jetbrains.compose.web.dom.*
 fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
+    val currentLanguage = LocalLanguage.current
 
     Div(attrs = {
         classes(styles.container)
@@ -32,6 +35,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                 marginBottom(AppSpacing.xl)
                 marginLeft(0.px)
                 cursor("pointer")
+                fontSize(AppTypography.sizeBodyLarge)
             }
             onClick { onBack() }
         }) {
@@ -49,7 +53,8 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     marginBottom(0.25.cssRem)
                 }
             }) {
-                val context = if (project.clientName != null) "${project.clientName} via ${project.entityName}" else project.entityName
+                val context =
+                    if (project.clientName != null) "${project.clientName} via ${project.entityName}" else project.entityName
                 Text(context)
             }
 
@@ -74,7 +79,8 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     fontSize(0.9.cssRem)
                 }
             }) {
-                val dateRange = "${project.startDate}${project.endDate?.let { " — $it" } ?: " — Heden"}"
+                val dateRange =
+                    "${project.startDate}${project.endDate?.let { " — $it" } ?: " — Heden"}"
                 Text("${project.details.role} • $dateRange")
             }
         }
@@ -100,8 +106,10 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     property("margin-right", "auto")
                 }
             }) {
-                Section(attrs = { classes(styles.card);
-                    style { width(90.percent) } }) {
+                Section(attrs = {
+                    classes(styles.card);
+                    style { width(90.percent) }
+                }) {
                     Div(attrs = {
                         classes(styles.h3Card)
                         style {
@@ -109,10 +117,10 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                             marginBottom(AppSpacing.xs)
                         }
                     }) {
-                        Text("De Uitdaging")
+                        Text(if (currentLanguage == AppLanguage.NL) "De Uitdaging" else "The Challenge")
                     }
                     Div(attrs = {
-                        classes(styles.bodySmall)
+                        classes(styles.bodyLarge)
                         style { color(theme.textSecondary) }
                     }) { Text(details.challenge) }
                 }
@@ -125,10 +133,10 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                             color(theme.textPrimary)
                         }
                     }) {
-                        Text("Mijn Oplossing")
+                        Text(if (currentLanguage == AppLanguage.NL) "Mijn Oplossing" else "My Solution")
                     }
                     Div(attrs = {
-                        classes(styles.bodySmall)
+                        classes(styles.bodyLarge)
                         style { color(theme.textSecondary) }
                     }) { Text(details.solution) }
                 }
@@ -147,22 +155,28 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     classes(styles.h2Section)
                     style {
                         marginBottom(AppSpacing.md)
-                        textAlign("center")
+                        textAlign("left")
                     }
                 }) {
-                    Text("Resultaten")
+                    Text(if (currentLanguage == AppLanguage.NL) "Resultaten" else "Results")
                 }
-                Ul(attrs = { style { listStyleType("none"); padding(0.px); margin(0.px) } }) {
+                Ul(attrs = {
+                    style {
+                        listStyleType("disc") // Gebruik standaard bullets
+                        paddingLeft(1.5.em)   // Ruimte voor de bullets
+                        property("color", theme.primary) // Kleur van de bullet
+                    }
+                }) {
                     details.keyAchievements.forEach { achievement ->
                         Li(attrs = {
                             classes(styles.bodyRegular)
                             style {
                                 marginBottom(AppSpacing.sm)
-                                display(DisplayStyle.Flex)
-                                gap(AppSpacing.sm)
+                                textAlign("left")
+                                // Zet de tekstkleur terug naar normaal als de bullet gekleurd is
+                                property("color", theme.textPrimary)
                             }
                         }) {
-                            Span(attrs = { style { color(theme.primary) } }) { Text("•") }
                             Text(achievement)
                         }
                     }
@@ -181,7 +195,7 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
                     style {
                         display(DisplayStyle.Flex)
                         flexWrap(FlexWrap.Wrap)
-                        gap(AppSpacing.xs)
+                        gap(AppSpacing.sm)
                         marginBottom(AppSpacing.xl)
                     }
                 }) {

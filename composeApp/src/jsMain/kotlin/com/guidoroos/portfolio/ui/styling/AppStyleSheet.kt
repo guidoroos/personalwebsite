@@ -105,7 +105,7 @@ class AppStylesheet(val theme: AppTheme) : StyleSheet() {
         backgroundColor(theme.surface)
         border(1.px, LineStyle.Solid, theme.border)
         borderRadius(AppSpacing.borderRadius)
-        padding(AppSpacing.lg)
+        padding(AppSpacing.md)
         display(DisplayStyle.Flex)
         flexDirection(FlexDirection.Column)
         gap(AppSpacing.md)

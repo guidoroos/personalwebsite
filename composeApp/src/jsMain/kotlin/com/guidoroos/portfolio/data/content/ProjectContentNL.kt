@@ -58,42 +58,57 @@ object ProjectContentNL {
             type = ProjectType.Employment,
             entityName = "iO",
             clientName = "BankingRight",
-            title = "White-label Banking App",
-            shortDescription = "Full-stack mobile development voor internationale banken zoals Aruba Bank.",
-            longDescription = "Verantwoordelijk voor de Android, iOS en KMP-lagen van een schaalbaar bankplatform.",
+            title = "White-label Banking Solution",
+            shortDescription = "Full-stack mobile development voor een schaalbaar KMP bankenplatform voor internationale banken.",
+            longDescription = "Medior engineer in een team van 8 man voor de ontwikkeling van een white-label app voor Aruba Bank, Orco Bank, Handelsbanken en Optimix. Focus op de integratie tussen KMP en native platformen.",
             startDate = "2023",
-            endDate = "heden",
+            endDate = "2026",
+            techStack = listOf("Kotlin Multiplatform", "Compose", "SwiftUI", "Swift TCA", "Ktor", "Koin", "Kotlin Wasm", "LLM Integration", "Figma API"),
             shouldHighlight = true,
-            techStack = listOf("Kotlin Multiplatform", "Compose", "SwiftUI", "LLM Integration"),
             details = ProjectDetail(
-                challenge = "Het bouwen van een generiek platform dat per bank klantspecifiek aanpasbaar is.",
-                role = "Senior Mobile Engineer",
-                solution = "Ontwikkeling van een UI testing framework met LLM-integratie en screenshot testing.",
+                challenge = "Het bouwen van een generiek platform dat per bank zeer specifiek configureerbaar moet blijven zonder code-duplicatie.",
+                role = "Mobile Engineer",
+                solution = "Gerealiseerd door gedeelde business logica in KMP te combineren met robuuste native UI-lagen en geavanceerde interne tooling.",
                 keyAchievements = listOf(
-                    "Gerealiseerde impact voor o.a. Aruba Bank",
-                    "Automatisering van UI-verificatie via AI-tooling"
+                    "Ontwikkelde de glue code om KMP Use Cases naadloos te integreren in iOS (SwiftUI en TCA).",
+                    "Bouwde een Figma-to-code exporter via de Figma API om design-configuraties te automatiseren.",
+                    "Realiseerde een AI-driven UI testing framework met UIAutomator en screenshot testing plugin.",
+                    "Verantwoordelijk voor complexe features zoals Device Overview, Zendesk chat integratie en gelinkte apparaten.",
+                    "Verbeterde de stabiliteit door bugfixes in de CI/CD pipeline  en het bouwen van een mock-omgeving voor lokale development.",
+                    "Ontwikkelde een custom intern dashboard met Kotlin Wasm."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/search?q=aruba%20bank&c=apps&hl=en",
+                    "App Store" to "https://apps.apple.com/nl/app/aruba-bank-app/id1533254729"
                 )
             )
         ),
         Project(
-            id = "natuurmonumenten-io",
+            id = "natuurmonumenten-app",
             type = ProjectType.Employment,
-            entityName = "iO",
-            shouldHighlight = true,
+            entityName = "Natuurmonumenten",
             clientName = "Natuurmonumenten",
-            title = "Advanced Navigation Engine",
-            shortDescription = "Custom pathfinding navigatie voor natuurgebieden.",
-            longDescription = "Ontwikkeling van een gespecialiseerde route-app met een eigen navigatie-engine.",
-            startDate = "2023",
-            techStack = listOf("React Native", "Docker", "OSRM", "Pathfinding"),
+            title = "Navigatie & Outdoor App",
+            shortDescription = "Greenfield ontwikkeling van een React Native navigatie-app voor 500+ routes, in 3,5 maand van start naar release.",
+            longDescription = "High-speed greenfield project met de focus op een custom geospatial engine. Gebouwd om realtime GPS-data en offline routebeheer te combineren voor een vlekkeloze wandelervaring.",
+            startDate = "2026",
+            endDate = "2026",
+            techStack = listOf("React Native", "TypeScript", "Expo", "Apollo Client", "MMKV", "Supabase", "Expo Maps"),
+            shouldHighlight = true,
             details = ProjectDetail(
-                challenge = "Nauwkeurige routebegeleiding op onofficiële paden.",
-                role = "Mobile Specialist",
-                solution = "Inzet van een custom OSRM Docker-container voor complexe path-snapping.",
+                challenge = "Het realiseren van een betrouwbare navigatie-engine voor onverharde paden binnen een extreem strakke deadline van 3,5 maand.",
+                role = "Lead Mobile Engineer",
+                solution = "Een custom client-side snapping engine ontwikkeld op basis van point-to-segment projectie en Haversine formules.",
                 keyAchievements = listOf(
-                    "Real-time route-instructies en progressie-logica",
-                    "Succesvolle integratie van complexe geospatial data"
-                )
+                    "Greenfield Release: In 14 weken van de eerste regel code naar een volledige lancering in de App Stores.",
+                    "Custom Navigatie-Engine: Realtime snapping op GPX-polylines voor de berekening van voortgang, resterende afstand en afslag-instructies.",
+                    "Map & Heading Optimalisatie: Vloeiende kaartrotatie via low-pass filtering en 'lookahead' logica voor complexe overlappende route-lussen.",
+                    "Performance Architectuur: Gebruik van useRef en useMemo om hoogfrequente sensordata te verwerken zonder UI-jank",
+                    "Offline-First: Robuuste netwerklaag met Apollo Client en MMKV-caching voor gebruik in gebieden zonder bereik."
+                ),
+                productUrls = mapOf(
+                    "Google Play(Natuurmonumenten)" to "https://play.google.com/store/apps/details?id=nl.natuurmonumenten.natuurmonumenten",
+                ),
             )
         ),
         Project(
@@ -102,18 +117,53 @@ object ProjectContentNL {
             entityName = "iO",
             clientName = "Van Lanschot Kempen",
             shouldHighlight = true,
-            title = "Android Architecture Transformation",
-            shortDescription = "Refactoring van een monolithische banking app naar een modulaire structuur.",
-            longDescription = "Geleid de transitie naar een schaalbare architectuur om toekomstige feature-ontwikkeling te versnellen.",
+            title = "Banking Fusie & Architectuur Transformatie",
+            shortDescription = "Android integratie voor een bankfusie en het omzetten van een monolithische codebase naar een modulaire Hilt-architectuur.",
+            longDescription = "Ingezet om een kritieke fusie-deadline te halen voor Van Lanschot Kempen. Na dit succes de leiding genomen in het moderniseren van de verouderde architectuur om de schaalbaarheid van de app te waarborgen.",
             startDate = "2023",
-            techStack = listOf("Android", "Kotlin", "Dagger/Hilt", "Modularization"),
+            endDate = "2023",
+            techStack = listOf("Android", "Kotlin", "Dagger Hilt", "Clean Architecture", "Modularization", "GitLab CI"),
             details = ProjectDetail(
-                challenge = "Een verouderde monolithische codebase opsplitsen zonder de dagelijkse operatie te verstoren.",
-                role = "Lead Android Architect",
-                solution = "Implementatie van een modulaire opzet met Dependency Injection.",
+                challenge = "Een harde deadline halen voor de technische samenvoeging van apps, terwijl de codebase werd gehinderd door een inefficiënte monolithische structuur en handmatige Dependency Injection.",
+                role = "Android developer en consultant",
+                solution = "Gerealiseerde fusie-deadline en vervolgens de transitie ingezet naar Clean Architecture en Dagger Hilt voor betere testbaarheid en onderhoudbaarheid.",
                 keyAchievements = listOf(
-                    "Significante verbetering van build-tijden en testbaarheid",
-                    "Succesvolle transitie naar een herbruikbare mappenstructuur"
+                    "Succesvolle Fusie: De deadline voor het mergen van de systemen na de overname behaald, waardoor de continuïteit voor eindgebruikers gewaarborgd bleef.",
+                    "Modernisering DI: De handmatige Dependency Injection via de Application-class vervangen door Dagger Hilt, wat leidde tot minder overhead en stabielere code.",
+                    "Start Modularisatie: Een fundament gelegd voor een multi-module mappenstructuur volgens Clean Architecture principes.",
+                    "Team Alignment: Het team en de vaste senior developers overtuigd van moderne standaarden, wat resulteerde in een transitie naar een toekomstbestendige werkwijze."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=com.LoginApp&hl=nl"
+                )
+            )
+        ),
+        Project(
+            id = "bnp-paribas-io",
+            type = ProjectType.Employment,
+            entityName = "iO",
+            clientName = "BNP Paribas",
+            title = "Lening-aanvraag & E-Sign Platform",
+            shortDescription = "Digitale transformatie van lening-processen met complexe validatie-rules en digitale handtekening-integraties.",
+            longDescription = "Ontwikkeling van een white-label oplossing voor persoonlijke leningen waarbij meerdere providers onder één app vallen met eigen styling. Verantwoordelijk voor de technische realisatie van complexe aanvraag-trajecten en de beveiliging van contract-ondertekening.",
+            startDate = "2023",
+            endDate = "2023",
+            techStack = listOf("Android", "Kotlin", "Jetpack Compose", "OpenAPI CodeGen", "Custom Chrome Tabs", "Deep Linking", "Kotlin Coroutines"),
+            shouldHighlight = true,
+            details = ProjectDetail(
+                challenge = "Het waarborgen van een soepele gebruikerservaring tijdens complexe data-entry flows die afhankelijk zijn van zware backend-berekeningen en strikte validatie-regels.",
+                role = "Mobile Engineer",
+                solution = "Gerealiseerd door geavanceerde debouncing en flow-cancellations te implementeren, waardoor de backend niet overbelast raakt terwijl de UI realtime feedback geeft.",
+                keyAchievements = listOf(
+                    "E-Sign Handover: Integratie van digitale handtekening-trajecten via Custom Chrome Tabs en Deep Linking, waarbij de app accuraat reageert op return-URL's van externe providers.",
+                    "Geavanceerde UI-interactie: Ontwikkeling van gesynchroniseerde inputs (slider en tekstveld) met complexe onderlinge afhankelijkheden en directe validatie.",
+                    "Performance Engineering: Implementatie van een debouncing-strategie op de netwerklaag om 'sluggishness' te voorkomen bij constante calculatie-verzoeken naar de backend.",
+                    "Smart Caching: Realisatie van een tijdelijke caching-laag die gegevens alleen vasthoudt zolang de aanvraag-flow actief is, conform security-protocollen.",
+                    "Integratie-expert: Gewerkt met OpenAPI-gebaseerde codegeneratie voor de koppeling met complexe legacy backend-systemen en adresvalidatie-services.",
+                    "Stakeholder Management: Effectief samengewerkt in een grote bancaire organisatie met diverse stakeholders en strenge juridische kaders."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=uk.co.bnpparibaspf.strategicoam&hl=en"
                 )
             )
         ),
@@ -122,37 +172,26 @@ object ProjectContentNL {
             type = ProjectType.Employment,
             entityName = "iO",
             clientName = "Viaplay",
-            title = "Viascore App Launch",
-            shortDescription = "Greenfield ontwikkeling van de Viascore Android app.",
-            longDescription = "De volledige Android-codebase vanaf de grond af opgebouwd tot aan de uiteindelijke release.",
+            title = "Viascore Greenfield Launch",
+            shortDescription = "End-to-end development of the Viascore Android app and supporting Firebase backend.",
+            longDescription = "Built the entire Android codebase from the first line of code to full production release. Managed the Firebase/Node.js backend and integrated complex video streaming services.",
             startDate = "2023",
-            techStack = listOf("Android", "Kotlin", "Firebase", "Node.js"),
-            details = ProjectDetail(
-                challenge = "Snelle time-to-market voor een nieuwe sport-app.",
-                role = "Lead Android Developer",
-                solution = "Samenwerking aan zowel de mobiele apps als de Firebase Node.js backend.",
-                keyAchievements = listOf(
-                    "Complete Android-applicatie opgeleverd vanaf nul",
-                    "Bijgedragen aan de stabiliteit van de cross-platform backend"
-                )
-            )
-        ),
-        Project(
-            id = "bnp-paribas-io",
-            type = ProjectType.Employment,
-            entityName = "iO",
-            clientName = "BNP Paribas Personal Finance",
-            title = "Contract E-sign & Loan Flows",
-            shortDescription = "Digitale transformatie van leningaanvragen.",
-            longDescription = "Ontwikkeling van kritieke flows voor e-signing en leningaanvragen op zowel Android als iOS.",
-            startDate = "2023",
+            endDate = "2023",
+            techStack = listOf("Android", "Kotlin", "Jetpack Compose", "Firebase", "Node.js", "Google Play Billing"),
             shouldHighlight = true,
-            techStack = listOf("Android", "iOS", "Mobile Security", "Fintech"),
             details = ProjectDetail(
-                challenge = "Complexe juridische flows gebruiksvriendelijk en veilig maken op mobiel.",
-                role = "Mobile Engineer",
-                solution = "Ontwikkeling en release van nieuwe features voor contractondertekening.",
-                keyAchievements = listOf("Succesvolle release van nieuwe aanvraag-flows")
+                challenge = "Launching a high-traffic sports app with video streaming and subscriptions within a tight time-to-market window.",
+                role = "Lead Mobile Developer",
+                solution = "Modern Kotlin/Compose stack combined with a Node.js Firebase backend for real-time scalability.",
+                keyAchievements = listOf(
+                    "Greenfield Android: Engineered the full app architecture using Jetpack Compose and Retrofit.",
+                    "Video Streaming: Integrated 3rd-party streaming libraries for high-performance sports clip playback.",
+                    "Monetization: Implemented Google Play Subscription model for full transaction lifecycles.",
+                    "Full-Stack Ownership: Managed Firebase Node.js backend with 24/7 standby support during launch."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=com.viaplay.clipapp&hl=nl"
+                ),
             )
         ),
         Project(
@@ -160,42 +199,59 @@ object ProjectContentNL {
             type = ProjectType.Employment,
             entityName = "iO",
             clientName = "Duivelaar Pompen",
-            title = "BLE Waterpomp Interface",
-            shortDescription = "Specialistische hardware-uitlezing via Bluetooth Low Energy.",
-            longDescription = "Onderhoud en verbetering van een specialistische app voor het beheer van industriële waterpompen.",
-            startDate = "2023",
+            title = "Industriële BLE Waterpomp Interface",
+            shortDescription = "Gespecialiseerde hardware-uitlezing en debugging van Bluetooth Low Energy (BLE) verbindingen.",
+            longDescription = "Ingezet voor het oplossen van complexe stabiliteitsproblemen in een Android-app die monteurs gebruiken voor het beheer van waterpompen in flatgebouwen. De focus lag op het betrouwbaar inlezen en aanpassen van hardware-instellingen via BLE.",
+            startDate = "2025",
+            endDate = "2025",
+            techStack = listOf("Android", "Kotlin", "Bluetooth Low Energy (BLE)", "GATT Services & Characteristics", "Hardware Simulator"),
             shouldHighlight = true,
-            techStack = listOf("Android", "Bluetooth Low Energy (BLE)", "Hardware Integration"),
             details = ProjectDetail(
-                challenge = "Stabiele communicatie met hardware-sensoren in variërende omstandigheden.",
-                role = "Android Engineer",
-                solution = "Verbetering van de BLE-uitleeslogica en data-verwerking.",
-                keyAchievements = listOf("Verhoogde betrouwbaarheid van pomp-data overdracht")
+                challenge = "Het reproduceren en verhelpen van ongrijpbare bugs in de communicatie tussen mobiele devices en industriële hardware-sensoren.",
+                role = "Android Specialist",
+                solution = "On-site onderzoek uitgevoerd bij de klant met hardware-simulatoren om de exacte oorzaak van synchronisatieproblemen te achterhalen.",
+                keyAchievements = listOf(
+                    "Veldonderzoek: Directe samenwerking met de klant op locatie om met hardware-simulatoren 'edge-case' scenario's te testen die in een kantooromgeving niet reproduceerbaar waren.",
+                    "Lifecycle Optimalisatie: Een fundamenteel probleem opgelost waarbij de app alle data opnieuw ging inladen zodra deze naar de achtergrond ging, wat door de trage BLE-verbinding tot enorme vertragingen leidde.",
+                    "BLE Expertise: Geoptimaliseerd van het inlezen van Services en Characteristics voor een snellere en stabielere data-overdracht naar de monteurs.",
+                    "Stabiliteitsslag: Een bestaande codebase geprofessionaliseerd en bugs verholpen die cruciaal waren voor de dagelijkse operatie van de monteurs.",
+                    "Betrouwbaarheid: De overdracht van pomp-data en het aanpassen van hardware-parameters via de app weer 100% betrouwbaar gemaakt."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=com.boostercontrol.duijvelaar"
+                )
             )
         ),
-
         // --- ABN AMRO ---
         Project(
             id = "abn-amro-private-banking",
             type = ProjectType.Employment,
-            entityName = "ABN AMRO Bank N.V.",
-            clientName = "Private Banking Digital",
-            title = "Legacy-to-Native Migration",
-            shortDescription = "Migratie van high-net-worth banking apps naar Kotlin MVVM.",
-            longDescription = "Verantwoordelijk voor de overgang van een hybride JS-framework naar een moderne native stack voor internationale markten.",
+            entityName = "ABN AMRO",
+            clientName = "ABN AMRO Private Banking",
+            title = "Native Migratie & Platform Leiderschap",
+            shortDescription = "Leiding gegeven aan de afronding van een kritieke transitie van hybride naar native Android voor Private Banking.",
+            longDescription = "Verantwoordelijk voor het vlottrekken van een gestagneerde migratie. Complexe modules omgezet naar Kotlin, waardoor het hybride framework binnen een maand volledig kon worden uitgefaseerd.",
             startDate = "2020",
             endDate = "2022",
-            techStack = listOf("Kotlin", "MVVM", "Security", "Betalingsverkeer"),
+            techStack = listOf("Android", "Kotlin", "Java", "MVVM", "Retrofit", "Mobile Security (OTP)", "Unit Testing"),
+
+            shouldHighlight = true,
             details = ProjectDetail(
-                challenge = "Het waarborgen van security bij betalingsverkeer tijdens een ingrijpende migratie.",
-                role = "Android Developer",
-                solution = "Implementatie van een moderne MVVM-structuur met Kotlin.",
+                challenge = "Het binnen één maand migreren van complexe en bedrijfskritische logica (OTP en login) van Java naar Kotlin om de legacy-platform deadline te halen.",
+                role = "Android Developer & Coördinator",
+                solution = "Snelle refactoring van legacy Java-code naar Kotlin, gecombineerd met intensieve scenario-testing met backend teams voor een foutloze livegang.",
                 keyAchievements = listOf(
-                    "Succesvolle migratie van hybride Javascript framework",
-                    "Verhoogde stabiliteit van inlogprocedures",
-                    "App live in meerdere landen voor vermogende klanten"
-                )
+                    "Voltooide Migratie: Door het overnemen van achterstallige modules kon de afdeling een maand later live zonder het hybride framework.",
+                    "Security Refactoring: Complexe Java-code voor web-login en transactiegoedkeuring (OTP) succesvol vertaald naar Kotlin en geoptimaliseerd.",
+                    "Standardisatie: Initiatief genomen voor app-brede migratie naar Retrofit voor API-calls en het hergebruik van UI-componenten tussen teams.",
+                    "Technisch Leiderschap: Voorzitter van de 'Android Developer Circle' (7 man), waarbij ik technische afstemming en best-practices binnen de afdeling coördineerde.",
+                    "Stakeholder Alignment: Nauw samengewerkt met backend-engineers om alle transactie-scenario's voor Private Banking klanten te valideren."
+                ),
+                productUrls = mapOf(
+                    "Google Play" to "https://play.google.com/store/apps/details?id=com.abnamro.privatebanking.belgium&hl=nl"
+                ),
             )
+
         )
     )
 }

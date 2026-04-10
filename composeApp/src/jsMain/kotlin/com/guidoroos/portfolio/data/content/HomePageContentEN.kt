@@ -5,9 +5,9 @@ import com.guidoroos.portfolio.util.yearsExperience
 
 
 val HomePageContentEN = HomeData(
-    title = "Mobile Architect & Senior Developer",
+    title = "Freelance Mobile Architect & Senior Developer",
     subtitle = "Roos Mobile",
-    locationInfo = "Based in Eindhoven. Available for on-site collaboration in Amsterdam, Rotterdam, Utrecht, Antwerp, and Düsseldorf.",
+    locationInfo = "Based in Eindhoven. Available for on-site collaboration as well in for example in Amsterdam, Rotterdam, Utrecht, Antwerp, and Düsseldorf",
     kmpPitch = """
     With $yearsExperience+ years of experience in native Android and iOS development, I bridge the gap between high-end performance and cross-platform efficiency. Drawing on deep expertise in both platforms, I leverage Kotlin Multiplatform (KMP) to architect robust, shared systems that eliminate redundant effort without compromising the 100% native experience.
 
@@ -22,6 +22,6 @@ val HomePageContentEN = HomeData(
     ),
     projectsTitle = "Featured Projects",
     allProjectsTitle = "View all projects",
-    ctaTitle = "Ready for the next step?",
-    ctaLinkText = "Get in touch"
+    ctaTitle = "Interested in working together?",
+    ctaLinkText = "Email Guido"
 )

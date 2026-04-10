@@ -79,7 +79,7 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                     width(250.px); height(250.px)
                     borderRadius(50.percent)
                     property("object-fit", "cover")
-                    property("object-position", "center 35%")
+                    property("object-position", "center 15%")
                     property("box-shadow", "0 10px 25px -5px rgba(0, 0, 0, 0.2)")
                     marginTop(AppSpacing.md)
                 }

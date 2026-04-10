@@ -40,7 +40,7 @@ object DarkTheme : AppTheme {
     override val surfaceHover = Color("#1e293b")
     override val border = Color("#1e293b")
     override val gridDot = Color("#242f42")
-    override val textPrimary = Color("#f8fafc")
+    override val textPrimary = Color("#f9fbff")
     override val textSecondary = Color("#94a3b8")
     override val textMuted = Color("#475569")
     override val iconBase = Color("#94a3b8")

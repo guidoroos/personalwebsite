@@ -87,6 +87,8 @@ fun Navbar(
 
                     style {
                         marginLeft(AppSpacing.md)
+                        height(30.px)
+                        width(30.px)
                     }
                 }
             ) {

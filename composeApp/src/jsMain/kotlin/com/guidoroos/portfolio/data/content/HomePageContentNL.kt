@@ -5,9 +5,9 @@ import com.guidoroos.portfolio.util.yearsExperience
 
 
 val HomePageContentNL = HomeData(
-    title = "Mobile Architect & Senior Developer",
+    title = "Freelance Mobile Architect & Senior Developer",
     subtitle = "Roos Mobile",
-    locationInfo = "Gevestigd in Eindhoven. Beschikbaar voor on-site samenwerking in Amsterdam, Rotterdam, Utrecht, Antwerpen en Düsseldorf.",
+    locationInfo = "Gevestigd in Eindhoven. Beschikbaar voor on-site samenwerking ook in bijvoorbeeld Amsterdam, Rotterdam, Utrecht, Antwerpen en Düsseldorf",
     kmpPitch = """
     Met meer dan $yearsExperience jaar ervaring in native Android en iOS development overbrug ik de kloof tussen hoogwaardige performance en cross-platform efficiëntie. Vanuit mijn diepe kennis van beide platformen zet ik Kotlin Multiplatform (KMP) in om gedeelde systemen te bouwen die dubbel werk elimineren, zonder concessies te doen aan de 100% native ervaring.
 
@@ -22,6 +22,6 @@ val HomePageContentNL = HomeData(
     ),
     projectsTitle = "Geselecteerde Projecten",
     allProjectsTitle = "Bekijk alle projecten",
-    ctaTitle = "Klaar voor de volgende stap?",
-    ctaLinkText = "Neem contact op"
+    ctaTitle = "Benieuwd naar de mogelijkheden?",
+    ctaLinkText = "Mail Guido "
 )
