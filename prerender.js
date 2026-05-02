@@ -66,7 +66,22 @@ const routes = [
   await browser.close();
 })();
 
+async function generateSitemap(routes) {
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${routes.map(route => `
+  <url>
+    <loc>${baseUrl}${route === '/' ? '' : route}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>${route === '/' ? 'weekly' : 'monthly'}</changefreq>
+    <priority>${route === '/' ? '1.0' : route.startsWith('/projects/') ? '0.8' : '0.6'}</priority>
+  </url>`).join('')}
+</urlset>`;
 
+  const sitemapPath = path.join(__dirname, 'dist', 'sitemap.xml');
+  fs.writeFileSync(sitemapPath, sitemap);
+  console.log('Sitemap.xml gegenereerd in /dist');
+}
 
 // Roep dit aan na je loop:
 await generateSitemap(routes);
