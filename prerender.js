@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const buildPath = path.join(__dirname, 'composeApp/build/dist/js/productionExecutable');
+const distPath = path.join(__dirname, 'dist');
+
 const baseUrl = 'https://guidoroos.nl';
 const projectIds = [
     "personal-website-compose",
@@ -65,6 +68,15 @@ const routes = [
   }
 
  generateSitemap(routes);
+
+ try {
+     console.log('Bezig met kopiëren van statische bestanden...');
+     fs.copySync(buildPath, distPath);
+     console.log('Statische bestanden succesvol gekopieerd naar /dist');
+ } catch (err) {
+     console.error('Fout bij kopiëren van bestanden:', err);
+ }
+
   await browser.close();
 })();
 
