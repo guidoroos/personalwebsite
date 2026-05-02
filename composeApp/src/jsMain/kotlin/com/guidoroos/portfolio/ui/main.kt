@@ -18,11 +18,10 @@ import com.guidoroos.portfolio.util.currentYear
 import com.guidoroos.portfolio.util.decodeInitialPage
 import com.guidoroos.portfolio.util.getBrowserLanguage
 import com.guidoroos.portfolio.util.isSystemInDarkMode
-import com.guidoroos.portfolio.util.jsonLd
 import com.guidoroos.portfolio.util.updateDataForPage
-import com.guidoroos.portfolio.util.updateMetadata
-import com.guidoroos.portfolio.util.updateUrl
+import kotlinx.browser.document
 import kotlinx.browser.window
+import
 
 
 val LocalAppTheme = staticCompositionLocalOf<AppTheme> { DarkTheme }
@@ -33,7 +32,11 @@ enum class AppLanguage { NL, EN }
 val LocalLanguage = staticCompositionLocalOf { AppLanguage.EN }
 
 fun main() {
+    val root = document.getElementById("root")
 
+    // We maken de root leeg zodat de 'oude' Puppeteer-meuk
+    // de nieuwe Compose-render niet in de weg zit.
+    root?.innerHTML = ""
 
     renderComposable(rootElementId = "root") {
         val currentPage = remember { mutableStateOf<Page>(Page.Home) }
