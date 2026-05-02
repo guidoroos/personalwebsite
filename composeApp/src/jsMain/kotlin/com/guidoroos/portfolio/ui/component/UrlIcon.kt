@@ -22,7 +22,7 @@ fun UrlIcon(svgName: String, url: String) {
             classes(styles.iconLinkFrame, styles.hoverIcon)
         }
     ) {
-        Img(src = "./$svgName.svg", alt = "$label icon") {
+        Img(src = "/$svgName.svg", alt = "$label icon") {
             style {
                 val iconSize = when {
                     svgName.contains("linkedin") -> 24.px
