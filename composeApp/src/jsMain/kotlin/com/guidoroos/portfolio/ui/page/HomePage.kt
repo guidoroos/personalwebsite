@@ -15,7 +15,6 @@ import com.guidoroos.portfolio.data.model.Page
 import com.guidoroos.portfolio.ui.component.ActionIcon
 import com.guidoroos.portfolio.ui.component.StandoutProjectCard
 import com.guidoroos.portfolio.util.rememberWindowWidth
-import kotlin.math.max
 
 @Composable
 fun HomePage(onNavigate: (Page) -> Unit) {
@@ -43,14 +42,15 @@ fun HomePage(onNavigate: (Page) -> Unit) {
             classes(styles.h1Hero)
             style { marginBottom(4.px) }
         }) {
-            Text(homePageContent.fullName)
+
+            Text(homePageContent.title)
         }
 
         // 2. De "Zakelijke" subtitel (Subtiel grijs)
         Span(attrs = {
             style {
                 opacity(0.6)
-                fontSize(1.3.cssRem)
+                fontSize(1.5.cssRem)
                 marginBottom(8.px)
             }
         }) {
@@ -66,7 +66,7 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                 marginTop(0.px)
             }
         }) {
-            Text(homePageContent.title)
+            Text(homePageContent.fullName)
         }
 
 
@@ -95,7 +95,7 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                     property("white-space", "pre-line")
                 }
             }) {
-                Text(homePageContent.kmpPitch)
+                Text(homePageContent.pitch)
             }
         }
 
@@ -195,7 +195,6 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                 }
         }
 
-// 2. The Text Button (No vertical spacing)
         Div(attrs = {
             style {
                 display(DisplayStyle.Flex)
@@ -203,20 +202,25 @@ fun HomePage(onNavigate: (Page) -> Unit) {
                 padding(AppSpacing.md, 0.px) // Only horizontal padding/internal vertical
             }
         }) {
-            Span(attrs = {
-                onClick { onNavigate(Page.Projects) }
+            A(
+                href = "/projects", // De fysieke URL voor Google
+                attrs = {
+                    onClick { event ->
+                        event.preventDefault()
+                        onNavigate(Page.Projects)
+                    }
 
-                classes(styles.bodyRegular)
-                style {
-                    cursor("pointer")
-                    fontWeight(AppTypography.weightBold)
-                    color(theme.textPrimary)
-
-                    // Text button styling
-                    textDecoration("underline")
-
+                    classes(styles.bodyRegular)
+                    style {
+                        cursor("pointer")
+                        fontWeight(AppTypography.weightBold)
+                        color(theme.textPrimary)
+                        textDecoration("underline")
+                        // Optioneel: zorg dat de link er niet als een standaard blauwe link uitziet
+                        property("text-decoration", "underline")
+                    }
                 }
-            }) {
+            ) {
                 Text(homePageContent.allProjectsTitle)
             }
         }

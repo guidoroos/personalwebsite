@@ -26,19 +26,27 @@ fun ProjectDetailPage(project: Project, onBack: () -> Unit) {
     }) {
 
         // 1. Navigation
-        Span(attrs = {
-            classes(styles.navLink)
-            style {
-                display(DisplayStyle.Flex)
-                alignItems(AlignItems.Center)
-                gap(AppSpacing.xs)
-                marginBottom(AppSpacing.xl)
-                marginLeft(0.px)
-                cursor("pointer")
-                fontSize(AppTypography.sizeBodyLarge)
+        A(
+            href = "/projects",
+            attrs = {
+                classes(styles.navLink)
+                style {
+                    display(DisplayStyle.Flex)
+                    alignItems(AlignItems.Center)
+                    gap(AppSpacing.xs)
+                    marginBottom(AppSpacing.xl)
+                    marginLeft(0.px)
+                    cursor("pointer")
+                    fontSize(AppTypography.sizeBodyLarge)
+                    textDecoration("none")
+                }
+
+                onClick { event ->
+                    event.preventDefault() // ✋ Stop de harde reload
+                    onBack()              // 🚀 Voer je eigen navigatie uit
+                }
             }
-            onClick { onBack() }
-        }) {
+        ) {
             Text("← Terug naar overzicht")
         }
 

@@ -20,61 +20,81 @@ fun StandoutProjectCard(
     val theme = LocalAppTheme.current
     val styles = LocalStyles.current
 
-    Div(attrs = {
-        onClick { onClickProject(project) }
-
-        style {
-            display(DisplayStyle.Flex)
-            flexDirection(FlexDirection.Column)
-            padding(AppSpacing.md)
-
-            // White background & standard border
-            backgroundColor(theme.surface)
-            border(1.px, LineStyle.Solid, theme.border)
-            borderRadius(8.px)
-            cursor("pointer")
-
-            property("transition", "transform 0.2s ease, box-shadow 0.2s ease")
-        }
-    }) {
-        // --- TITLE LOGIC ---
-        val clientName = project.clientName
-
-        if (clientName != null) {
-            // Primary Title: Client Name
-            Span(attrs = {
-                classes(styles.h3Card)
-                style { marginBottom(4.px) }
-            }) {
-                Text(clientName)
-            }
-        } else {
-            // Fallback Title: Non-nullable entityName (Smaller)
-            Span(attrs = {
-                classes(styles.bodyRegular)
-                style {
-                    color(theme.textPrimary)
-                    fontWeight(AppTypography.weightBold)
-                    marginBottom(4.px)
-                }
-            }) {
-                Text(project.entityName)
-            }
-        }
-
-        // --- DESCRIPTION ---
-        Span(attrs = {
-            classes(styles.bodySmall)
+    A(
+        href = "/projects/${project.id}",
+        attrs = {
             style {
-                color(theme.textSecondary)
-                // Line clamping to keep the card height consistent
-                property("display", "-webkit-box")
-                property("-webkit-line-clamp", "2")
-                property("-webkit-box-orient", "vertical")
-                overflow("hidden")
+                textDecoration("none")
+                display(DisplayStyle.Block)
+            }
+
+            onClick { event ->
+                event.preventDefault()
+                onClickProject(project)
+            }
+        }
+    ) {
+        Article(attrs = {
+            attr("itemscope", "")
+            attr("itemtype", "https://schema.org/CreativeWork")
+            style {
+                display(DisplayStyle.Flex)
+                flexDirection(FlexDirection.Column)
+                padding(AppSpacing.md)
+
+                backgroundColor(theme.surface)
+                border(1.px, LineStyle.Solid, theme.border)
+                borderRadius(8.px)
+                cursor("pointer")
+
+                property("transition", "transform 0.2s ease, box-shadow 0.2s ease")
             }
         }) {
-            Text(project.shortDescription)
+            // --- TITLE LOGIC ---
+            val clientName = project.clientName
+
+            if (clientName != null) {
+                // Gebruik H3 in plaats van Span voor betere hiërarchie
+                H3(attrs = {
+
+                    classes(styles.h3Card)
+                    style {
+                        marginTop(0.px)
+                        marginBottom(4.px)
+                    }
+                }) {
+                    Text(clientName)
+                }
+            } else {
+                H3(attrs = {
+
+                    classes(styles.bodyRegular)
+                    style {
+                        color(theme.textPrimary)
+                        fontWeight(AppTypography.weightBold)
+                        marginTop(0.px)
+                        marginBottom(4.px)
+                    }
+                }) {
+                    Text(project.entityName)
+                }
+            }
+
+            // --- DESCRIPTION ---
+            P(attrs = {
+                attr("itemprop", "name")
+                classes(styles.bodySmall)
+                style {
+                    color(theme.textSecondary)
+                    margin(0.px)
+                    property("display", "-webkit-box")
+                    property("-webkit-line-clamp", "2")
+                    property("-webkit-box-orient", "vertical")
+                    overflow("hidden")
+                }
+            }) {
+                Text(project.shortDescription)
+            }
         }
     }
 }

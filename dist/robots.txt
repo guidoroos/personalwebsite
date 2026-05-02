@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Blokkeer specifieke technische bestanden/mappen
+Disallow: /composeApp/          # Voorkom indexering van broncode mappen
+Disallow: /internal/            # Mocht je interne scripts hebben
+Disallow: *.js.map              # Voorkom dat Google je source maps indexeert
+Disallow: /build/               # Oude build-restanten
+
+Sitemap: https://guidoroos.nl/sitemap.xml

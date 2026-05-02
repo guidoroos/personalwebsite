@@ -26,6 +26,7 @@ fun Navbar(
     val styles = LocalStyles.current
     val isDark = theme is DarkTheme
     val currentLanguage = LocalLanguage.current
+    var showCvModal by remember { mutableStateOf(false) }
 
 
     Nav(attrs = { classes(styles.navBar) }) {
@@ -39,11 +40,17 @@ fun Navbar(
             UrlIcon(svgName = "linkedin", url = "https://linkedin.com/in/guido-roos91")
             UrlIcon(
                 svgName = if (isDark) "emailDark" else "email",
-                url = "mailto:guidoroos@protonmail.com"
+                url = "mailto:guido@roosmobile.nl"
             )
-            UrlIcon(
+            ActionIcon(
                 svgName = if (isDark) "cvDark" else "cv",
-                url = "https://rxresu.me/guidoroos/guido-roos"
+                onClickAction = { showCvModal = true },
+                attrsModifier = {
+                    style {
+                        height(30.px)
+                        width(30.px)
+                    }
+                }
             )
         }
 
@@ -53,17 +60,31 @@ fun Navbar(
         }) {
             NavigationItem.entries.forEach { item ->
                 val active = item.isActive(currentPage)
+                val path = when (item.rootPage) {
+                    Page.Home -> "/"
+                    Page.Projects -> "/projects"
+                    else -> "/"
+                }
 
-                Span(attrs = {
-                    classes(styles.navLink, styles.navLabel)
-                    style {
-                        marginLeft(AppSpacing.md)
+                A(
+                    href = path,
+                    attrs = {
+                        classes(styles.navLink, styles.navLabel)
+                        if (active) classes(styles.navLinkActive)
+
+                        style {
+                            marginLeft(AppSpacing.md)
+                            // Zorg dat de link zijn styling behoudt en niet blauw wordt
+                            textDecoration("none")
+                        }
+
+                        onClick { event ->
+                            event.preventDefault() // Voorkom harde reload
+                            onNavigate(item.rootPage)
+                        }
                     }
-
-                    if (active) classes(styles.navLinkActive)
-                    onClick { onNavigate(item.rootPage) }
-                }) {
-                    Text(if (currentLanguage == AppLanguage.NL) item.labelNL else  item.labelEN)
+                ) {
+                    Text(if (currentLanguage == AppLanguage.NL) item.labelNL else item.labelEN)
                 }
             }
 
@@ -95,5 +116,9 @@ fun Navbar(
                 toggleTheme()
             }
         }
+    }
+
+    if (showCvModal) {
+        CvLeadModal(onClose = { showCvModal = false })
     }
 }

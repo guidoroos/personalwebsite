@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-guidoroos",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "fs-extra": "^11.3.4",
+    "puppeteer": "^24.42.0"
+  }
+}

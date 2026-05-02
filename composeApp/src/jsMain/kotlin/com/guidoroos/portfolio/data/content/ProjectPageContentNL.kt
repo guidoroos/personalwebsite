@@ -13,5 +13,6 @@ val projectsPageDataNL = ProjectsPageModel(
     employmentTitle = "Ervaring in loondienst",
     employmentSubtitle = "Ruim $yearsExperience jaar ervaring in loondienst bij ABN AMRO en iO",
     sideProjectTitle = "Side Projects",
-    sideProjectSubtitle = "Creatieve projecten waarin ik experimenteer met alternatieve programmeertools en methodieken"
+    sideProjectSubtitle = "Creatieve projecten waarin ik experimenteer met alternatieve programmeertools en methodieken",
+    metaDescription = "Bekijk het portfolio van Guido Roos. Een selectie van mobiele projecten: van complexe bancaire systemen tot hoogwaardige Kotlin Multiplatform (KMP) oplossingen."
 )

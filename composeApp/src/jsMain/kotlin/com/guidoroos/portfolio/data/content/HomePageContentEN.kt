@@ -8,11 +8,11 @@ val HomePageContentEN = HomeData(
     title = "Freelance Mobile Architect & Senior Developer",
     subtitle = "Roos Mobile",
     locationInfo = "Based in Eindhoven. Available for on-site collaboration as well in for example in Amsterdam, Rotterdam, Utrecht, Antwerp, and Düsseldorf",
-    kmpPitch = """
-    With $yearsExperience+ years of experience in native Android and iOS development, I bridge the gap between high-end performance and cross-platform efficiency. Drawing on deep expertise in both platforms, I leverage Kotlin Multiplatform (KMP) to architect robust, shared systems that eliminate redundant effort without compromising the 100% native experience.
+    pitch = """
+    A successful app starts with the right technical strategy for your budget. Whether it's scaling a new idea through the efficiency of Kotlin Multiplatform, or delivering the high-end native UI that users expect on iOS and Android: I ensure the technology supports your business goals. By sharing logic where possible and building native where it matters, I offer a solution that sits right between 'fully separate teams' and 'limited cross-platform tools.' ⚖
 
-    Through Roos Mobile, I help businesses bypass the "double-cost" of separate teams by delivering a stable, long-term alternative to traditional cross-platform tools. Whether delivering full native solutions or shared architectures, my approach ensures a single source of truth, faster shipping cycles, and technical scalability.
-    """.trimIndent(),
+    This approach is backed by $yearsExperience years of experience in mobile development, sharpened through numerous projects for a wide range of clients at a leading agency. From rescuing stalled projects to strategically reinforcing established development teams: I provide the seniority needed to make apps technically sound and future-proof.
+""".trimIndent(),
     capabilitiesTitle = "Areas of Expertise",
     capabilities = listOf(
         "Kotlin Multiplatform (KMP)",
@@ -23,5 +23,6 @@ val HomePageContentEN = HomeData(
     projectsTitle = "Featured Projects",
     allProjectsTitle = "View all projects",
     ctaTitle = "Interested in working together?",
-    ctaLinkText = "Email Guido"
+    ctaLinkText = "Email Guido",
+    metaDescription = "Freelance Mobile Architect & Senior Developer. Specialist in Native Android, iOS, and Kotlin Multiplatform (KMP). Delivering high-performance mobile solutions with 100% native experience."
 )

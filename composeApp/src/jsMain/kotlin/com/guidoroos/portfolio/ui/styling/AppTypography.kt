@@ -14,7 +14,7 @@ object AppTypography {
     val weightBold = 700
 
     // --- Font Sizes (Typographic Scale) ---
-    val sizeH1 = 3.0.cssRem
+    val sizeH1 = 2.5.cssRem
     val sizeH2 = 2.0.cssRem
     val sizeH3 = 1.25.cssRem
     val sizeNav = 1.0.cssRem

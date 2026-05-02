@@ -11,9 +11,18 @@ import com.guidoroos.portfolio.ui.page.ProjectDetailPage
 import com.guidoroos.portfolio.ui.styling.AppTheme
 import com.guidoroos.portfolio.ui.styling.DarkTheme
 import com.guidoroos.portfolio.ui.styling.LightTheme
+import com.guidoroos.portfolio.util.HomeSchema
+import com.guidoroos.portfolio.util.ProjectSchema
+import com.guidoroos.portfolio.util.ProjectsPageSchema
 import com.guidoroos.portfolio.util.currentYear
+import com.guidoroos.portfolio.util.decodeInitialPage
 import com.guidoroos.portfolio.util.getBrowserLanguage
 import com.guidoroos.portfolio.util.isSystemInDarkMode
+import com.guidoroos.portfolio.util.jsonLd
+import com.guidoroos.portfolio.util.updateDataForPage
+import com.guidoroos.portfolio.util.updateMetadata
+import com.guidoroos.portfolio.util.updateUrl
+import kotlinx.browser.window
 
 
 val LocalAppTheme = staticCompositionLocalOf<AppTheme> { DarkTheme }
@@ -24,6 +33,8 @@ enum class AppLanguage { NL, EN }
 val LocalLanguage = staticCompositionLocalOf { AppLanguage.EN }
 
 fun main() {
+
+
     renderComposable(rootElementId = "root") {
         val currentPage = remember { mutableStateOf<Page>(Page.Home) }
         var isDark by remember { mutableStateOf(isSystemInDarkMode()) }
@@ -31,6 +42,17 @@ fun main() {
         val styles = remember(theme) { AppStylesheet(theme) }
         Style(styles)
         var currentLang by remember { mutableStateOf(getBrowserLanguage()) }
+        val lastRenderedPage = remember { mutableStateOf<Pair<Page, AppLanguage>?>(null) }
+
+
+        LaunchedEffect(Unit) {
+            currentPage.value = decodeInitialPage()
+            window.onpopstate = {
+                currentPage.value = decodeInitialPage()
+
+            }
+        }
+
 
         CompositionLocalProvider(
             LocalAppTheme provides theme,
@@ -51,13 +73,22 @@ fun main() {
                 Navbar(
                     currentPage = currentPage.value,
                     toggleTheme = { isDark = !isDark },
-                    setLanguage = {currentLang = it},
-                ) { currentPage.value = it }
+                    setLanguage = { currentLang = it },
+                ) {
+                    currentPage.value = it
+
+
+                }
 
                 // --- MAIN CONTENT AREA ---
                 Main(attrs = {
                     classes(styles.container)
                 }) {
+                    if (lastRenderedPage.value != currentPage.value to currentLang) {
+                        updateDataForPage(currentPage.value, currentLang)
+                        lastRenderedPage.value = currentPage.value to currentLang
+                    }
+
                     when (val page = currentPage.value) {
                         Page.Home -> HomePage { pageToNavigate ->
                             currentPage.value = pageToNavigate
@@ -108,6 +139,17 @@ fun main() {
                         }
                     }) {
                         Text("© $currentYear Guido Roos")
+                    }
+
+                    Div(attrs = {
+                        classes(styles.bodySmall)
+                        style {
+                            color(theme.textMuted)
+                            marginTop(0.25.cssRem)
+                            fontSize(0.8.cssRem) // Iets subtieler font
+                        }
+                    }) {
+                        Text("KVK: 42026757 | BTW: NL005440357B35")
                     }
                 }
             }

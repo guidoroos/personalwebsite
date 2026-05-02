@@ -9,5 +9,6 @@ data class ProjectsPageModel(
     val employmentTitle: String,
     val employmentSubtitle: String,
     val sideProjectTitle: String,
-    val sideProjectSubtitle: String
+    val sideProjectSubtitle: String,
+    val metaDescription: String
 )

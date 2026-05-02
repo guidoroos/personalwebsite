@@ -11,21 +11,21 @@ import org.jetbrains.compose.web.dom.*
 @Composable
 fun UrlIcon(svgName: String, url: String) {
     val styles = LocalStyles.current
+    val label = svgName.replaceFirstChar { it.uppercase() }
 
     A(
         href = url,
         attrs = {
             attr("target", "_blank")
-            // styles.hoverIcon handles your existing animation
+            attr("rel", "noopener noreferrer")
+            attr("aria-label", label)
             classes(styles.iconLinkFrame, styles.hoverIcon)
         }
     ) {
-        Img(src = "./$svgName.svg") {
+        Img(src = "./$svgName.svg", alt = "$label icon") {
             style {
-                // Optical sizing so they don't look weirdly different sizes
                 val iconSize = when {
                     svgName.contains("linkedin") -> 24.px
-                    svgName.contains("github") -> 26.px
                     else -> 26.px
                 }
                 width(iconSize)
