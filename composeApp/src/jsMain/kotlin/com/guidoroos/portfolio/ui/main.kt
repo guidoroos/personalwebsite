@@ -21,7 +21,6 @@ import com.guidoroos.portfolio.util.isSystemInDarkMode
 import com.guidoroos.portfolio.util.updateDataForPage
 import kotlinx.browser.document
 import kotlinx.browser.window
-import
 
 
 val LocalAppTheme = staticCompositionLocalOf<AppTheme> { DarkTheme }
